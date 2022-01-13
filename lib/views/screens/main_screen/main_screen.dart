@@ -1,5 +1,5 @@
-import 'package:currency_app/logic/bottom_nav_bar/bottom_nav_bar_cubit.dart';
-import 'package:currency_app/logic/bottom_nav_bar/bottom_nav_bar_state.dart';
+import 'package:currency_app/views/bottom_nav_bar/bottom_nav_bar_cubit.dart';
+import 'package:currency_app/views/bottom_nav_bar/bottom_nav_bar_state.dart';
 import 'package:currency_app/views/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -37,9 +37,7 @@ class _BodyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     BottomNavBarCubit bottomNavBarCubit = context.watch<BottomNavBarCubit>();
     BottomNavBarState state = bottomNavBarCubit.state;
-    return IndexedStack(
-        children: _tabs,
-        index: state.index);
+    return IndexedStack(children: _tabs, index: state.index);
   }
 }
 
