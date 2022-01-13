@@ -1,5 +1,5 @@
-import 'package:currency_app/views/bottom_nav_bar/bottom_nav_bar_cubit.dart';
-import 'package:currency_app/views/bottom_nav_bar/bottom_nav_bar_state.dart';
+import 'package:currency_app/views/logic/bottom_nav_bar/bottom_nav_bar_cubit.dart';
+import 'package:currency_app/views/logic/bottom_nav_bar/bottom_nav_bar_state.dart';
 import 'package:currency_app/views/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
