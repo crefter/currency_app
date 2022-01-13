@@ -31,6 +31,7 @@ dependencies:
   json_annotation:
   flutter_bloc: 8.0.0
   get_it: ^7.2.0
+  dio: ^4.0.4
 
 dev_dependencies:
   flutter_test:
