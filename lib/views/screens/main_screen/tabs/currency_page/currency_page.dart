@@ -8,6 +8,9 @@ class CurrencyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(color: Colors.yellow),
+      child: Center(
+        child: Text('Currency page'),
+      ),
     );
   }
 }

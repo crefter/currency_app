@@ -8,6 +8,14 @@ class ChangePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(color: Colors.red),
+      child: Row(
+        children: [
+          Text('To change'),
+          Center(
+            child: Text('Change page'),
+          ),
+        ],
+      ),
     );
   }
 }
