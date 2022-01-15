@@ -1,6 +1,6 @@
 import 'package:currency_app/data/api/currency_api.dart';
 import 'package:currency_app/data/api/currency_api_impl.dart';
-import 'package:currency_app/data/repositories/currency_repository.dart';
+import 'package:currency_app/domain/repositories/currency_repository.dart';
 import 'package:currency_app/data/repositories/currency_repository_impl.dart';
 import 'package:currency_app/domain/entities/currency.dart';
 import 'package:currency_app/domain/entities/rate.dart';
