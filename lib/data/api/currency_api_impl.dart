@@ -7,31 +7,33 @@ class CurrencyApiImpl implements CurrencyApi {
   final String _baseUrl = 'https://currencyapi.net/api/v1';
   final Dio _dio;
 
-  CurrencyApiImpl(this._dio);
+  CurrencyApiImpl(this._dio) {
+    _dio.options.baseUrl = _baseUrl;
+    _dio.options.queryParameters = {
+      'key': 'Z3G6RSKizv7mDWhh447nFOFZG7SStynZpyuG',
+      'output': 'JSON'
+    };
+  }
 
   @override
   Future<CurrencyResponse> getCurrencies() async {
     late Response<dynamic> response;
     try {
-      final url = _baseUrl +
-          '/currencies?key=Z3G6RSKizv7mDWhh447nFOFZG7SStynZpyuG&output=JSON';
-      response = await _dio.get(url);
+      response = await _dio.get('/currencies');
     } catch (e) {
-      print(e);
+      rethrow;
     }
-    return Future(() => CurrencyResponse.fromJson(response.data));
+    return CurrencyResponse.fromJson(response.data);
   }
 
   @override
   Future<CurrencyRatesResponse> getCurrencyRates({required String base}) async {
     late Response<dynamic> response;
     try {
-      final url = _baseUrl +
-          '/rates?key=Z3G6RSKizv7mDWhh447nFOFZG7SStynZpyuG&output=JSON';
-      response = await _dio.get(url);
+      response = await _dio.get('/rates');
     } catch (e) {
-      print(e);
+      rethrow;
     }
-    return Future(() => CurrencyRatesResponse.fromJson(response.data));
+    return CurrencyRatesResponse.fromJson(response.data);
   }
 }
