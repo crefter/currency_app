@@ -13,4 +13,15 @@ class Currency {
       _$CurrencyFromJson(json);
 
   Map<String, dynamic> toJson(Currency currency) => _$CurrencyToJson(currency);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Currency &&
+          runtimeType == other.runtimeType &&
+          name == other.name &&
+          country == other.country;
+
+  @override
+  int get hashCode => name.hashCode ^ country.hashCode;
 }
