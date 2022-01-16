@@ -15,9 +15,13 @@ class CurrencyService {
     return _repository.getRates(base: currency.name);
   }
 
-  Future<Rate> findRateFor(Currency currency, {List<Rate>? rates, Currency? defaultCurrency}) async {
-    List<Rate>? _rates = rates;
-    if (_rates == null) {
+  /// Find rate for [currency] in [rates].
+  /// If rates is empty then load rates for [defaultCurrency].
+  /// If [rates] is empty [defaultCurrency] cant be null.
+  Future<Rate> findRateFor(Currency currency, List<Rate> rates,
+      {Currency? defaultCurrency}) async {
+    List<Rate> _rates = rates;
+    if (rates.isEmpty) {
       _rates = await loadRatesFor(defaultCurrency!);
     }
     return _rates.firstWhere((element) => element.name == currency.name);

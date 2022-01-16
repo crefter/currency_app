@@ -52,7 +52,8 @@ void main() async {
       final service = GetIt.instance<CurrencyService>();
       final usd = Currency('USD', 'United States Dollar');
 
-      final rate = await service.findRateFor(usd);
+      final rate = await service.findRateFor(usd, [],
+          defaultCurrency: Currency('USD', 'United Stated Dollar'));
 
       expect(rate.value, 1.0);
     });
@@ -62,9 +63,7 @@ void main() async {
       final usd = Currency('USD', 'United States Dollar');
       final localRates = [Rate('USD', 1.0)];
 
-      final rate = await service.findRateFor(usd,
-          rates: localRates,
-          defaultCurrency: Currency('USD', 'United States Dollar'));
+      final rate = await service.findRateFor(usd, localRates);
 
       expect(rate.value, 1.0);
       expect(rate.name, 'USD');
