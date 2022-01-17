@@ -36,7 +36,7 @@ void main() {
 
     test('Get rates', () async {
       final repo = GetIt.instance<CurrencyRepository>();
-      var rates = await repo.getRates(base: 'USD');
+      var rates = await repo.getRatesFor(base: 'USD');
       final first = rates.first;
       final TypeMatcher typeMatcher = isA<Rate>()
           .having((p0) => p0.name, 'name', contains('AED'))

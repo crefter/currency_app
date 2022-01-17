@@ -5,10 +5,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 
 void setupDependencies() {
-  final getIt = GetIt.instance;
+  final get = GetIt.instance;
 
-  getIt.registerSingleton(Dio());
-  getIt.registerLazySingleton<CurrencyApi>(() => CurrencyApiImpl(getIt<Dio>()));
+  get.registerSingleton(Dio());
+  get.registerLazySingleton<CurrencyApi>(() => CurrencyApiImpl(get()));
 }
 
 void main() async {
@@ -27,7 +27,7 @@ void main() async {
     test('Get currency rates', () async {
       final api = GetIt.instance<CurrencyApi>();
 
-      final currencyRates = await api.getCurrencyRates(base: 'USD');
+      final currencyRates = await api.getCurrencyRatesFor(base: 'USD');
       final entries = currencyRates.rates.entries;
       final first = entries.first;
       final rub = entries.where((element) => element.key == 'RUB').first;

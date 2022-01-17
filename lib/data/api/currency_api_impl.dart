@@ -5,13 +5,16 @@ import 'package:dio/dio.dart';
 
 class CurrencyApiImpl implements CurrencyApi {
   final String _baseUrl = 'https://currencyapi.net/api/v1';
+  final _ratesEndpoint = '/rates';
+  final _currenciesEndpoint = '/currencies';
+  final _apiKey = 'Z3G6RSKizv7mDWhh447nFOFZG7SStynZpyuG';
   final Dio _dio;
 
   CurrencyApiImpl(this._dio) {
     _dio.options.baseUrl = _baseUrl;
     _dio.options.queryParameters = {
-      'key': 'Z3G6RSKizv7mDWhh447nFOFZG7SStynZpyuG',
-      'output': 'JSON'
+      'key': _apiKey,
+      'output': 'JSON',
     };
   }
 
@@ -19,7 +22,7 @@ class CurrencyApiImpl implements CurrencyApi {
   Future<CurrencyResponse> getCurrencies() async {
     late Response<dynamic> response;
     try {
-      response = await _dio.get('/currencies');
+      response = await _dio.get(_currenciesEndpoint);
     } catch (e) {
       rethrow;
     }
@@ -27,10 +30,11 @@ class CurrencyApiImpl implements CurrencyApi {
   }
 
   @override
-  Future<CurrencyRatesResponse> getCurrencyRates({required String base}) async {
+  Future<CurrencyRatesResponse> getCurrencyRatesFor(
+      {required String base}) async {
     late Response<dynamic> response;
     try {
-      response = await _dio.get('/rates');
+      response = await _dio.get(_ratesEndpoint);
     } catch (e) {
       rethrow;
     }

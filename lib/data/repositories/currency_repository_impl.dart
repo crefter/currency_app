@@ -18,20 +18,19 @@ class CurrencyRepositoryImpl implements CurrencyRepository {
     } catch (e) {
       print(e);
     }
-      final apiCurrencies = currencyResponse.currencies;
-      final entries = apiCurrencies.entries;
+    final apiCurrencies = currencyResponse.currencies;
+    final entries = apiCurrencies.entries;
 
-      var resultCurrency = entries.map((e) => Currency(e.key, e.value))
-          .toList();
+    var resultCurrency = entries.map((e) => Currency(e.key, e.value)).toList();
     return resultCurrency;
   }
 
   @override
-  Future<List<Rate>> getRates({required String base}) async {
+  Future<List<Rate>> getRatesFor({required String base}) async {
     late CurrencyRatesResponse currencyRatesResponse;
     try {
       currencyRatesResponse =
-      await _currencyApi.getCurrencyRates(base: 'USD');
+          await _currencyApi.getCurrencyRatesFor(base: 'USD');
     } catch (e) {
       print(e);
     }

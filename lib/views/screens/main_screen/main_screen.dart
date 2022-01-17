@@ -1,11 +1,11 @@
-import 'package:currency_app/views/logic/bottom_nav_bar/bottom_nav_bar_cubit.dart';
-import 'package:currency_app/views/logic/bottom_nav_bar/bottom_nav_bar_state.dart';
+import 'package:currency_app/views/bloc/bottom_nav_bar/bottom_nav_bar_cubit.dart';
+import 'package:currency_app/views/bloc/bottom_nav_bar/bottom_nav_bar_state.dart';
 import 'package:currency_app/views/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../consts.dart';
+import '../../../consts.dart';
 import 'tabs/change_page/change_page.dart';
 import 'tabs/currency_page/currency_page.dart';
 
