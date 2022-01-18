@@ -36,8 +36,6 @@ void setupDependencies() {
       () => LoadCurrenciesUseCase(get<CurrencyRepository>()));
   get.registerLazySingleton(
       () => FindRateForCurrencyUseCase(get<LoadRatesForCurrencyUseCase>()));
-
-  //blocs
 }
 
 void main() {
