@@ -5,11 +5,19 @@ abstract class RateEvent extends Equatable {
 }
 
 class RateCurrencyChosen extends RateEvent {
+  final String currencyName;
+
+  RateCurrencyChosen(this.currencyName);
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [currencyName];
 }
 
-class RateFindStarted extends RateEvent {
+class RateFoundStarted extends RateEvent {
+  final String query;
+
+  RateFoundStarted(this.query);
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [query];
 }

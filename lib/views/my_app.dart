@@ -1,4 +1,5 @@
 import 'package:currency_app/consts.dart';
+import 'package:currency_app/views/bloc/rate/rate_bloc.dart';
 import 'package:currency_app/views/navigation/main_navigation.dart';
 import 'package:currency_app/views/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => BottomNavBarCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => BottomNavBarCubit(),
+        ),
+        BlocProvider(
+          create: (_) => RateBloc(),
+        )
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: Consts.appName,

@@ -31,17 +31,3 @@ class RateError extends RateState {
   @override
   List<Object?> get props => [errorMessage];
 }
-
-class RateFinding extends RateState {
-  @override
-  List<Object?> get props => [];
-}
-
-class RateFound extends RateState {
-  final Rate rate;
-
-  RateFound(this.rate);
-
-  @override
-  List<Object?> get props => [rate];
-}
