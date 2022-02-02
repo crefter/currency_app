@@ -1,6 +1,7 @@
 import 'package:currency_app/data/api/currency_api.dart';
 import 'package:currency_app/data/dto/currency_rates_response.dart';
 import 'package:currency_app/data/dto/currency_response.dart';
+import 'package:currency_app/data/errors/currency_api_exception.dart';
 import 'package:dio/dio.dart';
 
 class CurrencyApiImpl implements CurrencyApi {
@@ -34,9 +35,14 @@ class CurrencyApiImpl implements CurrencyApi {
       {required String base}) async {
     late Response<dynamic> response;
     try {
+      final baseParameter = {'base': base};
+      _dio.options.queryParameters.addAll(baseParameter);
       response = await _dio.get(_ratesEndpoint);
-    } catch (e) {
-      rethrow;
+    } on DioError catch (e) {
+      final errorCode = e.response!.data['error']['code'];
+      final errorDescription =
+          e.response!.data['error']['message'];
+      throw CurrencyApiException(errorCode, errorDescription);
     }
     return CurrencyRatesResponse.fromJson(response.data);
   }
