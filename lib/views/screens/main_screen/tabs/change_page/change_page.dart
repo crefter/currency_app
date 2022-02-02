@@ -9,6 +9,7 @@ class ChangePage extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(color: Colors.red),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('To change'),
           Center(
