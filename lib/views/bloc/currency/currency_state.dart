@@ -9,11 +9,6 @@ class CurrencyInitial extends CurrencyState {
   List<Object> get props => [];
 }
 
-class CurrencyLoading extends CurrencyState {
-  @override
-  List<Object?> get props => [];
-}
-
 class CurrencyLoaded extends CurrencyState {
   final List<Currency> currencies;
 
@@ -21,6 +16,7 @@ class CurrencyLoaded extends CurrencyState {
 
   @override
   List<Object?> get props => [currencies];
+
 }
 
 class CurrencyError extends CurrencyState {
