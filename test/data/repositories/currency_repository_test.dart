@@ -40,7 +40,7 @@ void main() {
       final first = rates.first;
       final TypeMatcher typeMatcher = isA<Rate>()
           .having((p0) => p0.name, 'name', contains('AED'))
-          .having((p0) => p0.value, 'value', equals(3.67317));
+          .having((p0) => p0.value, 'value', greaterThanOrEqualTo(3.5));
 
       expect(first, typeMatcher);
     });

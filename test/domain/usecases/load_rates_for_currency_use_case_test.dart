@@ -25,7 +25,7 @@ void main() {
     when(mockCurrencyRepository.getRatesFor(base: anyNamed('base')))
         .thenAnswer((_) async => answer);
 
-    final result = await useCase(currency: usd);
+    final result = await useCase(currency: usd.name);
 
     expect(result, answer);
   });

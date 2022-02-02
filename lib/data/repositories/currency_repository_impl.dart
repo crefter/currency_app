@@ -16,7 +16,7 @@ class CurrencyRepositoryImpl implements CurrencyRepository {
     try {
       currencyResponse = await _currencyApi.getCurrencies();
     } catch (e) {
-      print(e);
+      rethrow;
     }
     final apiCurrencies = currencyResponse.currencies;
     final entries = apiCurrencies.entries;
@@ -30,9 +30,9 @@ class CurrencyRepositoryImpl implements CurrencyRepository {
     late CurrencyRatesResponse currencyRatesResponse;
     try {
       currencyRatesResponse =
-          await _currencyApi.getCurrencyRatesFor(base: 'USD');
+          await _currencyApi.getCurrencyRatesFor(base: base);
     } catch (e) {
-      print(e);
+      rethrow;
     }
     final rates = currencyRatesResponse.rates;
     final entries = rates.entries;

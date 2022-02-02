@@ -1,10 +1,9 @@
 import 'package:currency_app/domain/entities/currency.dart';
-import 'package:currency_app/domain/repositories/currency_repository.dart';
 import 'package:currency_app/domain/usecases/load_currencies_use_case.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockCurrencyRepository extends Mock implements CurrencyRepository {}
+import 'load_rates_for_currency_use_case_test.mocks.dart';
 
 void main() {
   late MockCurrencyRepository mockCurrencyRepository;
