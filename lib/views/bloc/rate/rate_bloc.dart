@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:currency_app/data/errors/currency_api_exception.dart';
 import 'package:currency_app/domain/entities/rate.dart';
+import 'package:currency_app/domain/usecases/find_rates_for_currency_use_case.dart';
 import 'package:currency_app/domain/usecases/load_rates_for_currency_use_case.dart';
 import 'package:equatable/equatable.dart';
 import 'package:get_it/get_it.dart';
@@ -13,6 +14,8 @@ part 'rate_state.dart';
 class RateBloc extends Bloc<RateEvent, RateState> {
   final _loadRatesForCurrencyUseCase =
       GetIt.instance<LoadRatesForCurrencyUseCase>();
+  final _findRatesForCurrencyUseCase =
+      GetIt.instance<FindRatesForCurrencyUseCase>();
   List<Rate> _rates = [];
 
   RateBloc() : super(RateInitial()) {
@@ -42,13 +45,12 @@ class RateBloc extends Bloc<RateEvent, RateState> {
     }
   }
 
-  FutureOr<void> _onRateFoundStarted(
-      RateFoundStarted event, Emitter<RateState> emit) {
+  Future<FutureOr<void>> _onRateFoundStarted(
+      RateFoundStarted event, Emitter<RateState> emit) async {
     if (state is RateLoaded) {
-      emit(RateLoaded(_rates
-          .where((element) =>
-              element.name.toLowerCase().contains(event.query.toLowerCase()))
-          .toList()));
+      final currency = event.query;
+      final rates = await _findRatesForCurrencyUseCase(currency, _rates);
+      emit(RateLoaded(rates));
     }
   }
 }
