@@ -1,3 +1,4 @@
+import 'package:currency_app/consts.dart';
 import 'package:currency_app/views/bloc/rate/rate_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -9,7 +10,7 @@ class RatesListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: BoxConstraints(maxHeight: 400),
+      constraints: BoxConstraints(maxHeight: Consts.heightRatesList),
       child: BlocBuilder<RateBloc, RateState>(builder: (context, state) {
         if (state is RateLoading) {
           return Center(
@@ -21,12 +22,8 @@ class RatesListWidget extends StatelessWidget {
             shrinkWrap: true,
             itemCount: rates.length,
             itemBuilder: (context, index) {
-              return Row(
-                children: [
-                  Text(rates[index].name),
-                  Text(rates[index].value.toString()),
-                ],
-              );
+              return Text(
+                  '${rates[index].name} : ${rates[index].value.toStringAsFixed(Consts.digitAfterDecimalPoint)}');
             },
             separatorBuilder: (BuildContext context, int index) {
               return Divider(
