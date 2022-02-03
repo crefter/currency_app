@@ -2,13 +2,13 @@ import 'package:currency_app/consts.dart';
 import 'package:currency_app/strings.dart';
 import 'package:currency_app/views/bloc/bottom_nav_bar/bottom_nav_bar_cubit.dart';
 import 'package:currency_app/views/bloc/bottom_nav_bar/bottom_nav_bar_state.dart';
+import 'package:currency_app/views/pages/change_page/change_page.dart';
+import 'package:currency_app/views/pages/currency_page/currency_page.dart';
 import 'package:currency_app/views/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'tabs/change_page/change_page.dart';
-import 'tabs/currency_page/currency_page.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);

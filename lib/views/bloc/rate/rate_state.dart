@@ -17,7 +17,7 @@ class RateLoading extends RateState {
 class RateLoaded extends RateState {
   final List<Rate> rates;
 
-  RateLoaded(this.rates);
+  const RateLoaded(this.rates);
 
   @override
   List<Object?> get props => [rates];
@@ -26,7 +26,7 @@ class RateLoaded extends RateState {
 class RateError extends RateState {
   final String errorMessage;
 
-  RateError(this.errorMessage);
+  const RateError(this.errorMessage);
 
   @override
   List<Object?> get props => [errorMessage];
