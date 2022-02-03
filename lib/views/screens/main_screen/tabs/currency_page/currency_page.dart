@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class CurrencyPage extends StatelessWidget {
-  const CurrencyPage();
+  const CurrencyPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class CurrencyPage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(Consts.currencyPagePadding),
         child: Column(
-          children: [
+          children: const [
             ChoiceCurrencyWidget(),
             SizedBox(
               height: Consts.heightBetweenCurrencyAndRateWidgets,

@@ -18,7 +18,7 @@ class CurrencyErrorWidget extends StatelessWidget {
         border: Border.all(
           color: Colors.black,
         ),
-        borderRadius: BorderRadius.all(
+        borderRadius: const BorderRadius.all(
           Radius.circular(Consts.defaultBorderRadius),
         ),
       ),

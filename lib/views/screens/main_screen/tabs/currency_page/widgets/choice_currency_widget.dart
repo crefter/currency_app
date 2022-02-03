@@ -19,10 +19,10 @@ class ChoiceCurrencyWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
+        const Text(
           Strings.enterCurrencyHint,
         ),
-        SizedBox(
+        const SizedBox(
           width: Consts.defaultWidthOfGap,
         ),
         Expanded(
@@ -31,20 +31,21 @@ class ChoiceCurrencyWidget extends StatelessWidget {
               optionsBuilder: (textEditingValue) {
                 final query = textEditingValue.text;
                 if (query.isEmpty) {
-                  return Iterable<Currency>.empty();
+                  return const Iterable<Currency>.empty();
                 } else {
-                  if (state is CurrencyLoaded)
+                  if (state is CurrencyLoaded) {
                     return state.currencies.where((element) =>
                         element.name.toLowerCase().contains(query.toLowerCase()));
+                  }
                 }
-                return Iterable<Currency>.empty();
+                return const Iterable<Currency>.empty();
               },
               onSelected: (Currency currency) =>
                   context.read<RateBloc>().add(RateCurrencyChosen(currency.name)),
               fieldViewBuilder:
                   (context, textEditingController, focusNode, onFieldSubmitted) {
                 return TextFormField(
-                  decoration: InputDecoration(hintText: Strings.enterCurrencyHint),
+                  decoration: const InputDecoration(hintText: Strings.enterCurrencyHint),
                   focusNode: focusNode,
                   controller: textEditingController,
                   onFieldSubmitted: (_) => onFieldSubmitted(),

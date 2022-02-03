@@ -10,10 +10,10 @@ class RatesListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: BoxConstraints(maxHeight: Consts.heightRatesList),
+      constraints: const BoxConstraints(maxHeight: Consts.heightRatesList),
       child: BlocBuilder<RateBloc, RateState>(builder: (context, state) {
         if (state is RateLoading) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         } else if (state is RateLoaded) {
@@ -26,7 +26,7 @@ class RatesListWidget extends StatelessWidget {
                   '${rates[index].name} : ${rates[index].value.toStringAsFixed(Consts.digitAfterDecimalPoint)}');
             },
             separatorBuilder: (BuildContext context, int index) {
-              return Divider(
+              return const Divider(
                 color: Colors.blue,
               );
             },
@@ -34,7 +34,7 @@ class RatesListWidget extends StatelessWidget {
         } else if (state is RateError) {
           return Text(state.errorMessage);
         }
-        return SizedBox.shrink();
+        return const SizedBox.shrink();
       }),
     );
   }

@@ -14,8 +14,8 @@ class ChoiceRateWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(Strings.rateHint),
-        SizedBox(
+        const Text(Strings.rateHint),
+        const SizedBox(
           height: Consts.defaultHeightOfGap,
         ),
         Builder(builder: (context) {
@@ -24,7 +24,7 @@ class ChoiceRateWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: Strings.enterCurrencyHint,
                 ),
                 onChanged: (text) {
@@ -34,12 +34,12 @@ class ChoiceRateWidget extends StatelessWidget {
             ],
           );
         }),
-        SizedBox(
+        const SizedBox(
           height: Consts.defaultHeightOfGap,
         ),
         Row(
           mainAxisSize: MainAxisSize.min,
-          children: [
+          children: const [
             SizedBox(
               width: Consts.defaultHeightOfGap,
             ),

@@ -7,10 +7,10 @@ class ChangePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Colors.red),
+      decoration: const BoxDecoration(color: Colors.red),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
+        children: const [
           Text('To change'),
           Center(
             child: Text('Change page'),

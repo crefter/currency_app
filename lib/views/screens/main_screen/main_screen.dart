@@ -17,7 +17,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(Strings.mainPageName),
+        title: const Text(Strings.mainPageName),
         elevation: Consts.appBarElevation,
       ),
       body: const _BodyWidget(),
@@ -54,7 +54,7 @@ class _FABWidget extends StatelessWidget {
     if (context.watch<BottomNavBarCubit>().state.index == indexChangePage) {
       return FloatingActionButton(
         onPressed: () {},
-        child: Icon(Icons.add_outlined),
+        child: const Icon(Icons.add_outlined),
         mini: false,
       );
     }
@@ -92,7 +92,7 @@ class _BottomNavBarWidget extends StatelessWidget {
                   .changeBottomNavBar(BottomNavBarItems.Second);
             }
           },
-          items: [
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.change_circle_outlined),
               label: Strings.changeLabel,
