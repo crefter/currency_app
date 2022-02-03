@@ -1,3 +1,4 @@
+import 'package:currency_app/consts.dart';
 import 'package:currency_app/views/bloc/currency/currency_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -18,7 +19,7 @@ class CurrencyErrorWidget extends StatelessWidget {
           color: Colors.black,
         ),
         borderRadius: BorderRadius.all(
-          Radius.circular(10.0),
+          Radius.circular(Consts.defaultBorderRadius),
         ),
       ),
       child: Text(errorMessage),

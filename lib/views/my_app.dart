@@ -1,4 +1,4 @@
-import 'package:currency_app/consts.dart';
+import 'package:currency_app/strings.dart';
 import 'package:currency_app/views/bloc/rate/rate_bloc.dart';
 import 'package:currency_app/views/navigation/main_navigation.dart';
 import 'package:currency_app/views/theme/theme.dart';
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: Consts.appName,
+        title: Strings.appName,
         theme: AppTheme.current,
         routes: mainNavigation.routes,
         onGenerateRoute: (settings) => mainNavigation.onGenerateRoute(settings),
