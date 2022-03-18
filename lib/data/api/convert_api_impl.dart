@@ -22,13 +22,14 @@ class ConvertApiImpl implements ConvertApi {
     required double amount,
     required Currency from,
     required Currency to,
-    OutputEnum output = OutputEnum.json,
+    Output? output,
   }) async {
+    final name = output != null ? output.name : 'JSON';
     final Map<String, dynamic> parameters = {
       'amount': amount.toString(),
       'from': from.name,
       'to': to.name,
-      'output': Output.create(output).name,
+      'output': name,
     };
 
     _dio.options.queryParameters.addAll(parameters);

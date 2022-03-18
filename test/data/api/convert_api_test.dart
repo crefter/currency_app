@@ -25,7 +25,7 @@ void main() async {
     test('should convert from to', () async {
       final response = ConvertResponse(
         conversion:
-            Conversion(amount: 10.0, from: 'RUB', to: 'USD', result: 300),
+            ConversionResponse(amount: 10.0, from: 'RUB', to: 'USD', result: 300),
       );
       when(api.convert()).thenAnswer((_) async => response);
 
@@ -33,7 +33,7 @@ void main() async {
 
       final expected = ConvertResponse(
         conversion:
-            Conversion(amount: 10.0, from: 'RUB', to: 'USD', result: 300),
+            ConversionResponse(amount: 10.0, from: 'RUB', to: 'USD', result: 300),
       );
 
       expect(actual, expected);
@@ -42,7 +42,7 @@ void main() async {
     test('should return bad answer from to', () async {
       final response = ConvertResponse(
         conversion:
-        Conversion(amount: 10.0, from: 'RUB', to: 'USD', result: 120),
+        ConversionResponse(amount: 10.0, from: 'RUB', to: 'USD', result: 120),
       );
       when(api.convert()).thenAnswer((_) async => response);
 
@@ -50,7 +50,7 @@ void main() async {
 
       final expected = ConvertResponse(
         conversion:
-        Conversion(amount: 10.0, from: 'RUB', to: 'USD', result: 300),
+        ConversionResponse(amount: 10.0, from: 'RUB', to: 'USD', result: 300),
       );
 
       bool actual = answer == expected;

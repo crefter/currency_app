@@ -33,7 +33,7 @@ class MockConvertApi extends _i1.Mock implements _i3.ConvertApi {
           {double? amount,
           _i5.Currency? from,
           _i5.Currency? to,
-          _i3.OutputEnum? output = _i3.OutputEnum.json}) =>
+          _i3.Output? output}) =>
       (super.noSuchMethod(
               Invocation.method(#convert, [],
                   {#amount: amount, #from: from, #to: to, #output: output}),

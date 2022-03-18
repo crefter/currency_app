@@ -6,7 +6,7 @@ abstract class ConvertApi {
     required double amount,
     required Currency from,
     required Currency to,
-    OutputEnum output = OutputEnum.json,
+    Output? output,
   });
 }
 

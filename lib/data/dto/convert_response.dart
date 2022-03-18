@@ -1,20 +1,20 @@
 class ConvertResponse {
 
   ConvertResponse({
-    required Conversion conversion,
+    required ConversionResponse conversion,
   }) {
     _conversion = conversion;
   }
 
   ConvertResponse.fromJson(dynamic json) {
     _conversion = (json['conversion'] != null
-        ? Conversion.fromJson(json['conversion'])
+        ? ConversionResponse.fromJson(json['conversion'])
         : null)!;
   }
 
-  late final Conversion _conversion;
+  late final ConversionResponse _conversion;
 
-  Conversion get conversion => _conversion;
+  ConversionResponse get conversion => _conversion;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -33,9 +33,9 @@ class ConvertResponse {
   int get hashCode => _conversion.hashCode;
 }
 
-class Conversion {
+class ConversionResponse {
 
-  Conversion({
+  ConversionResponse({
     required double amount,
     required String from,
     required String to,
@@ -47,7 +47,7 @@ class Conversion {
     _result = result;
   }
 
-  Conversion.fromJson(dynamic json) {
+  ConversionResponse.fromJson(dynamic json) {
     _amount = json['amount'];
     _from = json['from'];
     _to = json['to'];
@@ -79,7 +79,7 @@ class Conversion {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is Conversion &&
+      other is ConversionResponse &&
           runtimeType == other.runtimeType &&
           _amount == other._amount &&
           _from == other._from &&
