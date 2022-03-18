@@ -41,7 +41,7 @@ class RateBloc extends Bloc<RateEvent, RateState> {
             '${e.description} (code of exception: ${e.code.toString()})'));
       }
     } else {
-      emit(RateError('Something went wrong!'));
+      emit(const RateError('Something went wrong!'));
     }
   }
 

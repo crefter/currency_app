@@ -15,8 +15,8 @@ void main() {
   });
 
   List<Currency> repositoryAnswer = [
-    Currency('RUB', 'Russian Ruble'),
-    Currency('USD', 'United States Dollar')
+    const Currency('RUB', 'Russian Ruble'),
+    const Currency('USD', 'United States Dollar')
   ];
 
   test('should load currencies from the repository', () async {

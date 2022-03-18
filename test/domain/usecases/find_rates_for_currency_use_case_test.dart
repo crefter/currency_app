@@ -20,8 +20,8 @@ void main() {
 
   final answer = [Rate('USD', 1.0), Rate('RUB', 30.0)];
   final answerIfListEmpty = [Rate('RUB', 1.0), Rate('USD', 70.0)];
-  final defaultCurrency = Currency('RUB', 'Russian Ruble');
-  final currency = Currency('USD', 'United States Dollar');
+  const defaultCurrency = Currency('RUB', 'Russian Ruble');
+  const currency = Currency('USD', 'United States Dollar');
   final rateIfListEmpty = Rate('USD', 70.0);
 
   group('find rate test', () {

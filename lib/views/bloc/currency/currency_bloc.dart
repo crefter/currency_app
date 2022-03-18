@@ -22,6 +22,7 @@ class CurrencyBloc extends Bloc<CurrencyEvent, CurrencyState> {
     on<CurrencySelectEnded>(
       _onCurrencySelectEnded,
     );
+    add(CurrencyAppStarted());
   }
 
   FutureOr<void> _onCurrencyAppStarted(

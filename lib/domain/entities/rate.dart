@@ -23,4 +23,9 @@ class Rate {
 
   @override
   int get hashCode => name.hashCode ^ value.hashCode;
+
+  @override
+  String toString() {
+    return '"code" : $name, "value" : $value}';
+  }
 }

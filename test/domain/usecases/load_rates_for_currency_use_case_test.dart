@@ -18,7 +18,7 @@ void main() {
     useCase = LoadRatesForCurrencyUseCase(mockCurrencyRepository);
   });
 
-  final Currency usd = Currency('USD', 'United States Dollar');
+  const Currency usd = Currency('USD', 'United States Dollar');
   final answer = [Rate('USD', 1.0)];
 
   test('should load rates for currency from the repository', () async {

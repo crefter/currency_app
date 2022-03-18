@@ -11,7 +11,6 @@ import 'package:currency_app/views/navigation/main_navigation.dart';
 import 'package:currency_app/views/screens/screen_factory/screen_factory.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 void setupDependencies() {
@@ -40,16 +39,10 @@ void setupDependencies() {
           () => FindRatesForCurrencyUseCase(get<LoadRatesForCurrencyUseCase>()));
 
   //blocs
-
   get.registerSingleton<CurrencyBloc>(CurrencyBloc());
 }
 
 void main() {
   setupDependencies();
-  final currencyBloc = GetIt.instance<CurrencyBloc>();
-  currencyBloc.add(CurrencyAppStarted());
-  runApp(BlocProvider.value(
-    value: currencyBloc,
-    child: MyApp(),
-  ));
+  runApp(MyApp());
 }
