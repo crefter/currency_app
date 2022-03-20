@@ -1,17 +1,20 @@
+import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'rate.g.dart';
 
+@immutable
 @JsonSerializable()
 class Rate {
   final String name;
-  final double value;
+  final num value;
+
+  @override
+  int get hashCode => name.hashCode ^ value.hashCode;
 
   Rate(this.name, this.value);
 
   factory Rate.fromJson(Map<String, dynamic> json) => _$RateFromJson(json);
-
-  Map<String, dynamic> toJson(Rate rate) => _$RateToJson(rate);
 
   @override
   bool operator ==(Object other) =>
@@ -22,10 +25,9 @@ class Rate {
           value == other.value;
 
   @override
-  int get hashCode => name.hashCode ^ value.hashCode;
-
-  @override
   String toString() {
     return '"code" : $name, "value" : $value}';
   }
+
+  Map<String, dynamic> toJson(Rate rate) => _$RateToJson(rate);
 }

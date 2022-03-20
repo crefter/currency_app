@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class RateLoadedWidget extends StatefulWidget {
-  const RateLoadedWidget({
-    Key? key,
-    required this.rates,
-  }) : super(key: key);
-
   final List<Rate> rates;
+
+  const RateLoadedWidget({
+    required this.rates,
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<RateLoadedWidget> createState() => _RateLoadedWidgetState();
@@ -24,10 +24,10 @@ class _RateLoadedWidgetState extends State<RateLoadedWidget> {
       itemBuilder: (context, index) {
         return RatesListItemWidget(
           name: widget.rates[index].name,
-          value: widget.rates[index].value,
+          value: widget.rates[index].value.toDouble(),
         );
       },
-      separatorBuilder: (BuildContext context, int index) {
+      separatorBuilder: (context, index) {
         return const Divider(
           color: Colors.blue,
         );

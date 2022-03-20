@@ -1,7 +1,7 @@
 import 'package:currency_app/data/api/currency_api.dart';
 import 'package:currency_app/data/api/currency_api_impl.dart';
-import 'package:currency_app/domain/repositories/currency_repository.dart';
 import 'package:currency_app/data/repositories/currency_repository_impl.dart';
+import 'package:currency_app/domain/repositories/currency_repository.dart';
 import 'package:currency_app/domain/usecases/find_rates_for_currency_use_case.dart';
 import 'package:currency_app/domain/usecases/load_currencies_use_case.dart';
 import 'package:currency_app/domain/usecases/load_rates_for_currency_use_case.dart';
@@ -17,26 +17,34 @@ void setupDependencies() {
   final get = GetIt.instance;
 
   //views
-  get.registerSingleton(ScreenFactory());
-  get.registerSingleton(MainNavigation());
+  get
+    ..registerSingleton(ScreenFactory())
+    ..registerSingleton(MainNavigation());
 
   //network
   get.registerSingleton<Dio>(Dio());
 
   //api
-  get.registerLazySingleton<CurrencyApi>(() => CurrencyApiImpl(get<Dio>()));
+  get.registerLazySingleton<CurrencyApi>(
+    () => CurrencyApiImpl(get<Dio>()),
+  );
 
   //repositories
   get.registerLazySingleton<CurrencyRepository>(
-          () => CurrencyRepositoryImpl(get<CurrencyApi>()));
+    () => CurrencyRepositoryImpl(get<CurrencyApi>()),
+  );
 
   //use cases
-  get.registerLazySingleton<LoadRatesForCurrencyUseCase>(
-          () => LoadRatesForCurrencyUseCase(get<CurrencyRepository>()));
-  get.registerLazySingleton<LoadCurrenciesUseCase>(
-          () => LoadCurrenciesUseCase(get<CurrencyRepository>()));
-  get.registerLazySingleton<FindRatesForCurrencyUseCase>(
-          () => FindRatesForCurrencyUseCase(get<LoadRatesForCurrencyUseCase>()));
+  get
+    ..registerLazySingleton<LoadRatesForCurrencyUseCase>(
+      () => LoadRatesForCurrencyUseCase(get<CurrencyRepository>()),
+    )
+    ..registerLazySingleton<LoadCurrenciesUseCase>(
+      () => LoadCurrenciesUseCase(get<CurrencyRepository>()),
+    )
+    ..registerLazySingleton<FindRatesForCurrencyUseCase>(
+      () => FindRatesForCurrencyUseCase(get<LoadRatesForCurrencyUseCase>()),
+    );
 
   //blocs
   get.registerSingleton<CurrencyBloc>(CurrencyBloc());

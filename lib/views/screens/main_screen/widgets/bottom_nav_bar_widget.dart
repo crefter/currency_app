@@ -1,3 +1,4 @@
+import 'package:currency_app/strings.dart';
 import 'package:currency_app/views/bloc/bottom_nav_bar/bottom_nav_bar_cubit.dart';
 import 'package:currency_app/views/bloc/bottom_nav_bar/bottom_nav_bar_state.dart';
 import 'package:currency_app/views/theme/theme.dart';
@@ -5,15 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../strings.dart';
 
 class BottomNavBarWidget extends StatelessWidget {
+  static const indexChangePage = 0;
+  static const indexCurrencyPage = 1;
+
   const BottomNavBarWidget({
     Key? key,
   }) : super(key: key);
-
-  static const indexChangePage = 0;
-  static const indexCurrencyPage = 1;
 
   @override
   Widget build(BuildContext context) {

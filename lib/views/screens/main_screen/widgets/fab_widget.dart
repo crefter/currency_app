@@ -4,11 +4,11 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/src/provider.dart';
 
 class FABWidget extends StatelessWidget {
+  static const indexChangePage = 0;
+
   const FABWidget({
     Key? key,
   }) : super(key: key);
-
-  static const indexChangePage = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,6 @@ class FABWidget extends StatelessWidget {
       return FloatingActionButton(
         onPressed: () {},
         child: const Icon(Icons.add_outlined),
-        mini: false,
       );
     }
     return Container();

@@ -19,13 +19,14 @@ class ConvertRepositoryImpl implements ConvertRepository {
     late ConvertResponse convertResponse;
     try {
       convertResponse = await _convertApi.convert(
-          amount: amount,
-          from: from,
-          to: to,
-          output: Output.create(OutputEnum.json));
+        amount: amount,
+        from: from.name,
+        to: to.name,
+        output: Output.create(OutputEnum.json),
+      );
 
       return Conversion(
-        convertResponse.conversion.result,
+        convertResponse.conversion.amount,
         convertResponse.conversion.from,
         convertResponse.conversion.to,
         convertResponse.conversion.result,

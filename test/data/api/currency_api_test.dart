@@ -7,15 +7,14 @@ import 'package:get_it/get_it.dart';
 void setupDependencies() {
   final get = GetIt.instance;
 
-  get.registerSingleton(Dio());
-  get.registerLazySingleton<CurrencyApi>(() => CurrencyApiImpl(get()));
+  get
+    ..registerSingleton(Dio())
+    ..registerLazySingleton<CurrencyApi>(() => CurrencyApiImpl(get()));
 }
 
 void main() async {
   group('Currency api tests', () {
-    setUpAll(() {
-      setupDependencies();
-    });
+    setUpAll(setupDependencies);
 
     test('Get currencies', () async {
       final api = GetIt.instance<CurrencyApi>();

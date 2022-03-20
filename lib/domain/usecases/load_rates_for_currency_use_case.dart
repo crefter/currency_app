@@ -7,6 +7,6 @@ class LoadRatesForCurrencyUseCase {
   LoadRatesForCurrencyUseCase(this._repository);
 
   Future<List<Rate>> call({required String currency}) async {
-    return await _repository.getRatesFor(base: currency);
+    return _repository.getRatesFor(base: currency);
   }
 }

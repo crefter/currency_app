@@ -13,7 +13,7 @@ class CurrencyApiImpl implements CurrencyApi {
 
   CurrencyApiImpl(this._dio) {
     _dio.options.baseUrl = _baseUrl;
-    _dio.options.queryParameters = {
+    _dio.options.queryParameters = <String, String>{
       'key': _apiKey,
       'output': 'JSON',
     };
@@ -21,29 +21,33 @@ class CurrencyApiImpl implements CurrencyApi {
 
   @override
   Future<CurrencyResponse> getCurrencies() async {
-    late Response<dynamic> response;
+    late Response<Map<String, dynamic>> response;
     try {
       response = await _dio.get(_currenciesEndpoint);
-    } catch (e) {
+    } on DioError {
       rethrow;
     }
-    return CurrencyResponse.fromJson(response.data);
+    return CurrencyResponse.fromJson(response.data as Map<String, dynamic>);
   }
 
   @override
-  Future<CurrencyRatesResponse> getCurrencyRatesFor(
-      {required String base}) async {
-    late Response<dynamic> response;
+  Future<CurrencyRatesResponse> getCurrencyRatesFor({
+    required String base,
+  }) async {
+    late Response<Map<String, dynamic>> response;
     try {
       final baseParameter = {'base': base};
       _dio.options.queryParameters.addAll(baseParameter);
-      response = await _dio.get(_ratesEndpoint);
+      response = await _dio.get<Map<String, dynamic>>(_ratesEndpoint);
     } on DioError catch (e) {
-      final errorCode = e.response!.data['error']['code'];
-      final errorDescription =
-          e.response!.data['error']['message'];
+      final data = e.response?.data as Map<String, dynamic>;
+      final error = data['error'] as Map<String, dynamic>;
+      final errorCode = error['code'].toString();
+      final errorDescription = error['message'].toString();
       throw CurrencyApiException(errorCode, errorDescription);
     }
-    return CurrencyRatesResponse.fromJson(response.data);
+    return CurrencyRatesResponse.fromJson(
+      response.data as Map<String, dynamic>,
+    );
   }
 }
