@@ -9,14 +9,13 @@ class CurrencyErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var errorMessage = context.select((CurrencyBloc bloc) {
+    final errorMessage = context.select<CurrencyBloc, String>((bloc) {
       final state = bloc.state as CurrencyError;
       return state.errorMessage;
     });
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.black,
         ),
         borderRadius: const BorderRadius.all(
           Radius.circular(Consts.defaultBorderRadius),

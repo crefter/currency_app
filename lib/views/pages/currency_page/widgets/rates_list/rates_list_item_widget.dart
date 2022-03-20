@@ -1,20 +1,20 @@
+import 'package:currency_app/consts.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../../../../consts.dart';
-
 class RatesListItemWidget extends StatelessWidget {
-  const RatesListItemWidget({
-    Key? key,
-    required this.name,
-    required this.value,
-  }) : super(key: key);
-
   final String name;
   final double value;
+
+  const RatesListItemWidget({
+    required this.name,
+    required this.value,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
-        '$name : ${value.toStringAsFixed(Consts.digitAfterDecimalPoint)}');
+      '$name : ${value.toStringAsFixed(Consts.digitAfterDecimalPoint)}',
+    );
   }
 }

@@ -1,6 +1,6 @@
+import 'package:currency_app/views/bloc/bottom_nav_bar/bottom_nav_bar_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'bottom_nav_bar_state.dart';
 
 class BottomNavBarCubit extends Cubit<BottomNavBarState> {
   BottomNavBarCubit()

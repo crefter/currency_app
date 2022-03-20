@@ -14,9 +14,9 @@ void main() {
     useCase = LoadCurrenciesUseCase(mockCurrencyRepository);
   });
 
-  List<Currency> repositoryAnswer = [
+  final repositoryAnswer = <Currency>[
     const Currency('RUB', 'Russian Ruble'),
-    const Currency('USD', 'United States Dollar')
+    const Currency('USD', 'United States Dollar'),
   ];
 
   test('should load currencies from the repository', () async {

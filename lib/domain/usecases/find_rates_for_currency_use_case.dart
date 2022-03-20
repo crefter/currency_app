@@ -9,9 +9,12 @@ class FindRatesForCurrencyUseCase {
   /// Find rates for [currency] in [rates].
   /// If rates is empty then load rates for [defaultCurrency].
   /// If [rates] is empty [defaultCurrency] cant be null.
-  Future<List<Rate>> call(String currency, List<Rate> rates,
-      {String defaultCurrency = 'USD'}) async {
-    List<Rate> _rates = rates;
+  Future<List<Rate>> call(
+    String currency,
+    List<Rate> rates, {
+    String defaultCurrency = 'USD',
+  }) async {
+    var _rates = rates;
     if (_rates.isEmpty) {
       _rates = await _loadRatesUseCase(currency: defaultCurrency);
     }

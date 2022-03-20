@@ -6,7 +6,6 @@ import 'dart:async' as _i4;
 
 import 'package:currency_app/data/api/convert_api.dart' as _i3;
 import 'package:currency_app/data/dto/convert_response.dart' as _i2;
-import 'package:currency_app/domain/entities/currency.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -29,15 +28,19 @@ class MockConvertApi extends _i1.Mock implements _i3.ConvertApi {
   }
 
   @override
-  _i4.Future<_i2.ConvertResponse> convert(
-          {double? amount,
-          _i5.Currency? from,
-          _i5.Currency? to,
-          _i3.Output? output}) =>
+  _i4.Future<_i2.ConvertResponse> convert({
+    double? amount,
+    String? from,
+    String? to,
+    _i3.Output? output,
+  }) =>
       (super.noSuchMethod(
-              Invocation.method(#convert, [],
-                  {#amount: amount, #from: from, #to: to, #output: output}),
-              returnValue:
-                  Future<_i2.ConvertResponse>.value(_FakeConvertResponse_0()))
-          as _i4.Future<_i2.ConvertResponse>);
+        Invocation.method(
+          #convert,
+          [],
+          {#amount: amount, #from: from, #to: to, #output: output},
+        ),
+        returnValue:
+            Future<_i2.ConvertResponse>.value(_FakeConvertResponse_0()),
+      ) as _i4.Future<_i2.ConvertResponse>);
 }

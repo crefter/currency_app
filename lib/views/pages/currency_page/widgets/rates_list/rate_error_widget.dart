@@ -1,12 +1,12 @@
 import 'package:flutter/widgets.dart';
 
 class RateErrorWidget extends StatelessWidget {
-  const RateErrorWidget({
-    Key? key,
-    required this.errorMessage,
-  }) : super(key: key);
-
   final String errorMessage;
+
+  const RateErrorWidget({
+    required this.errorMessage,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

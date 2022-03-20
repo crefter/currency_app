@@ -7,6 +7,6 @@ class LoadCurrenciesUseCase {
   LoadCurrenciesUseCase(this._repository);
 
   Future<List<Currency>> call() async {
-    return await _repository.getCurrencies();
+    return _repository.getCurrencies();
   }
 }

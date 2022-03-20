@@ -11,17 +11,17 @@ import 'package:get_it/get_it.dart';
 void setupDependencies() {
   final getIt = GetIt.instance;
 
-  getIt.registerSingleton<Dio>(Dio());
-  getIt.registerSingleton<CurrencyApi>(CurrencyApiImpl(getIt<Dio>()));
-  getIt.registerSingleton<CurrencyRepository>(
-      CurrencyRepositoryImpl(getIt<CurrencyApi>()));
+  getIt
+    ..registerSingleton<Dio>(Dio())
+    ..registerSingleton<CurrencyApi>(CurrencyApiImpl(getIt<Dio>()))
+    ..registerSingleton<CurrencyRepository>(
+      CurrencyRepositoryImpl(getIt<CurrencyApi>()),
+    );
 }
 
 void main() {
   group('Currency repository tests', () {
-    setUpAll(() {
-      setupDependencies();
-    });
+    setUpAll(setupDependencies);
 
     test('Get currencies', () async {
       final repo = GetIt.instance<CurrencyRepository>();
@@ -29,14 +29,17 @@ void main() {
       final first = currencies.first;
       final typeMatcher = isA<Currency>()
           .having((p0) => p0.name, 'name', contains('AED'))
-          .having((p0) => p0.country, 'country',
-              contains('United Arab Emirates Dirham'));
+          .having(
+            (p0) => p0.country,
+            'country',
+            contains('United Arab Emirates Dirham'),
+          );
       expect(first, typeMatcher);
     });
 
     test('Get rates', () async {
       final repo = GetIt.instance<CurrencyRepository>();
-      var rates = await repo.getRatesFor(base: 'USD');
+      final rates = await repo.getRatesFor(base: 'USD');
       final first = rates.first;
       final TypeMatcher typeMatcher = isA<Rate>()
           .having((p0) => p0.name, 'name', contains('AED'))

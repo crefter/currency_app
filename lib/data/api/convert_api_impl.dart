@@ -1,7 +1,6 @@
 import 'package:currency_app/data/api/convert_api.dart';
 import 'package:currency_app/data/dto/convert_response.dart';
-import 'package:currency_app/data/errors/currency_api_exception.dart';
-import 'package:currency_app/domain/entities/currency.dart';
+import 'package:currency_app/data/errors/convert_api_exception.dart';
 import 'package:dio/dio.dart';
 
 class ConvertApiImpl implements ConvertApi {
@@ -12,7 +11,7 @@ class ConvertApiImpl implements ConvertApi {
 
   ConvertApiImpl(this._dio) {
     _dio.options.baseUrl = _baseUrl;
-    _dio.options.queryParameters = {
+    _dio.options.queryParameters = <String, String>{
       'key': _apiKey,
     };
   }
@@ -20,28 +19,34 @@ class ConvertApiImpl implements ConvertApi {
   @override
   Future<ConvertResponse> convert({
     required double amount,
-    required Currency from,
-    required Currency to,
+    required String from,
+    required String to,
     Output? output,
   }) async {
     final name = output != null ? output.name : 'JSON';
-    final Map<String, dynamic> parameters = {
+    final parameters = <String, dynamic>{
       'amount': amount.toString(),
-      'from': from.name,
-      'to': to.name,
+      'from': from,
+      'to': to,
       'output': name,
     };
 
     _dio.options.queryParameters.addAll(parameters);
 
-    late Response<dynamic> response;
+    late Response<Map<String, dynamic>> response;
     try {
-      response = await _dio.get(_convertEndpoint);
+      response = await _dio.get<Map<String, dynamic>>(_convertEndpoint);
     } on DioError catch (e) {
-      throw CurrencyApiException(
-          e.response!.data['message'], e.response!.data['errors'].toString());
+      throw ConvertApiException(
+        (e.response as Response<Map<String, dynamic>>)
+            .data!['message']
+            .toString(),
+        (e.response as Response<Map<String, dynamic>>)
+            .data!['errors']
+            .toString(),
+      );
     }
 
-    return ConvertResponse.fromJson(response.data);
+    return ConvertResponse.fromJson(response.data as Map<String, dynamic>);
   }
 }

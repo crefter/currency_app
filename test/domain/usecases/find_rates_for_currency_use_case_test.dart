@@ -26,21 +26,25 @@ void main() {
 
   group('find rate test', () {
     test('should find rate for currency from the repository', () async {
-
       final result = await useCase(currency.name, answer);
 
       expect(result, [Rate('USD', 1.0)]);
     });
 
-    test('should find rate for currency from the repository if rates is empty',
-        () async {
-      when(mockLoadRatesForCurrencyUseCase(currency: anyNamed('currency')))
-          .thenAnswer((_) async => answerIfListEmpty);
+    test(
+      'should find rate for currency from the repository if rates is empty',
+      () async {
+        when(mockLoadRatesForCurrencyUseCase(currency: anyNamed('currency')))
+            .thenAnswer((_) async => answerIfListEmpty);
 
-      final result = await useCase(currency.name, [],
-          defaultCurrency: defaultCurrency.name);
+        final result = await useCase(
+          currency.name,
+          [],
+          defaultCurrency: defaultCurrency.name,
+        );
 
-      expect(result, [rateIfListEmpty]);
-    });
+        expect(result, [rateIfListEmpty]);
+      },
+    );
   });
 }

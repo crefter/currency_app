@@ -12,28 +12,37 @@ import 'convert_api_test.mocks.dart';
 void setupDependencies() {
   final get = GetIt.instance;
 
-  get.registerSingleton(Dio());
-  get.registerLazySingleton<ConvertApi>(() => ConvertApiImpl(get()));
+  get
+    ..registerSingleton(Dio())
+    ..registerLazySingleton<ConvertApi>(() => ConvertApiImpl(get()));
 }
 
 @GenerateMocks([ConvertApi])
 void main() async {
   group('Convert api tests', () {
-    setUpAll(() => setupDependencies());
+    setUpAll(setupDependencies);
     final api = MockConvertApi();
 
     test('should convert from to', () async {
       final response = ConvertResponse(
-        conversion:
-            ConversionResponse(amount: 10.0, from: 'RUB', to: 'USD', result: 300),
+        conversion: ConversionResponse(
+          amount: 10.0,
+          from: 'RUB',
+          to: 'USD',
+          result: 300,
+        ),
       );
       when(api.convert()).thenAnswer((_) async => response);
 
       final actual = await api.convert();
 
       final expected = ConvertResponse(
-        conversion:
-            ConversionResponse(amount: 10.0, from: 'RUB', to: 'USD', result: 300),
+        conversion: ConversionResponse(
+          amount: 10.0,
+          from: 'RUB',
+          to: 'USD',
+          result: 300,
+        ),
       );
 
       expect(actual, expected);
@@ -41,19 +50,27 @@ void main() async {
 
     test('should return bad answer from to', () async {
       final response = ConvertResponse(
-        conversion:
-        ConversionResponse(amount: 10.0, from: 'RUB', to: 'USD', result: 120),
+        conversion: ConversionResponse(
+          amount: 10.0,
+          from: 'RUB',
+          to: 'USD',
+          result: 120,
+        ),
       );
       when(api.convert()).thenAnswer((_) async => response);
 
       final answer = await api.convert();
 
       final expected = ConvertResponse(
-        conversion:
-        ConversionResponse(amount: 10.0, from: 'RUB', to: 'USD', result: 300),
+        conversion: ConversionResponse(
+          amount: 10.0,
+          from: 'RUB',
+          to: 'USD',
+          result: 300,
+        ),
       );
 
-      bool actual = answer == expected;
+      final actual = answer == expected;
 
       expect(actual, false);
     });
