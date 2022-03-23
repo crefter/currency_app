@@ -2,12 +2,14 @@ import 'package:currency_app/consts.dart';
 import 'package:currency_app/domain/entities/currency.dart';
 import 'package:currency_app/strings.dart';
 import 'package:currency_app/views/bloc/currency/currency_bloc.dart';
-import 'package:currency_app/views/bloc/rate/rate_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
 
 class ChoiceCurrencyWidget extends StatelessWidget {
-  const ChoiceCurrencyWidget({
+  final void Function(Currency currency) _onSelected;
+
+  const ChoiceCurrencyWidget(
+    this._onSelected, {
     Key? key,
   }) : super(key: key);
 
@@ -38,8 +40,7 @@ class ChoiceCurrencyWidget extends StatelessWidget {
               }
               return const Iterable<Currency>.empty();
             },
-            onSelected: (currency) =>
-                context.read<RateBloc>().add(RateCurrencyChosen(currency.name)),
+            onSelected: _onSelected,
             fieldViewBuilder:
                 (context, textEditingController, focusNode, onFieldSubmitted) {
               return TextFormField(
