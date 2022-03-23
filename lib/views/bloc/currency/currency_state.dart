@@ -12,18 +12,17 @@ class CurrencyInitial extends CurrencyState {
 class CurrencyLoaded extends CurrencyState {
   final List<Currency> currencies;
 
-  CurrencyLoaded(this.currencies);
-
   @override
   List<Object?> get props => [currencies];
 
+  const CurrencyLoaded(this.currencies);
 }
 
 class CurrencyError extends CurrencyState {
   final String errorMessage;
 
-  CurrencyError(this.errorMessage);
-
   @override
   List<Object?> get props => [errorMessage];
+
+  const CurrencyError(this.errorMessage);
 }

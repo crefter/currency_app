@@ -12,8 +12,8 @@ class CurrencyAppStarted extends CurrencyEvent {
 class CurrencySelectEnded extends CurrencyEvent {
   final Currency selected;
 
-  CurrencySelectEnded(this.selected);
-
   @override
   List<Object?> get props => [selected];
+
+  const CurrencySelectEnded(this.selected);
 }

@@ -10,7 +10,6 @@ part 'currency_event.dart';
 
 part 'currency_state.dart';
 
-
 class CurrencyBloc extends Bloc<CurrencyEvent, CurrencyState> {
   final LoadCurrenciesUseCase _loadCurrenciesUseCase =
       GetIt.instance<LoadCurrenciesUseCase>();
@@ -26,12 +25,14 @@ class CurrencyBloc extends Bloc<CurrencyEvent, CurrencyState> {
   }
 
   FutureOr<void> _onCurrencyAppStarted(
-      CurrencyAppStarted event, Emitter<CurrencyState> emit) async {
+    CurrencyAppStarted event,
+    Emitter<CurrencyState> emit,
+  ) async {
     emit(CurrencyLoaded(await _loadCurrenciesUseCase()));
   }
 
   FutureOr<void> _onCurrencySelectEnded(
-      CurrencySelectEnded event, Emitter<CurrencyState> emit) async {
-
-  }
+    CurrencySelectEnded event,
+    Emitter<CurrencyState> emit,
+  ) async {}
 }
