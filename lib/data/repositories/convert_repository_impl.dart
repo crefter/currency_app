@@ -31,7 +31,7 @@ class ConvertRepositoryImpl implements ConvertRepository {
         convertResponse.conversion.to,
         convertResponse.conversion.result,
       );
-    } catch (e) {
+    } on Exception {
       rethrow;
     }
   }
