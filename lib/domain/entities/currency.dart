@@ -4,6 +4,8 @@ part 'currency.g.dart';
 
 @JsonSerializable()
 class Currency {
+  static const empty = Currency('', '');
+
   final String name;
   final String country;
 
