@@ -18,7 +18,7 @@ void setupDependencies() {
 }
 
 @GenerateMocks([ConvertApi])
-void main() async {
+Future<void> main() async {
   group('Convert api tests', () {
     setUpAll(setupDependencies);
     final api = MockConvertApi();

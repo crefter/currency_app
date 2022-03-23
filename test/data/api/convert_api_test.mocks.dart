@@ -28,19 +28,12 @@ class MockConvertApi extends _i1.Mock implements _i3.ConvertApi {
   }
 
   @override
-  _i4.Future<_i2.ConvertResponse> convert({
-    double? amount,
-    String? from,
-    String? to,
-    _i3.Output? output,
-  }) =>
+  _i4.Future<_i2.ConvertResponse> convert(
+          {double? amount, String? from, String? to, _i3.Output? output}) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #convert,
-          [],
-          {#amount: amount, #from: from, #to: to, #output: output},
-        ),
-        returnValue:
-            Future<_i2.ConvertResponse>.value(_FakeConvertResponse_0()),
-      ) as _i4.Future<_i2.ConvertResponse>);
+              Invocation.method(#convert, [],
+                  {#amount: amount, #from: from, #to: to, #output: output}),
+              returnValue:
+                  Future<_i2.ConvertResponse>.value(_FakeConvertResponse_0()))
+          as _i4.Future<_i2.ConvertResponse>);
 }

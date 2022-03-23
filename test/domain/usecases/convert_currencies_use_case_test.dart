@@ -8,7 +8,7 @@ import 'package:mockito/mockito.dart';
 import '../../data/repositories/convert_repository_test.mocks.dart';
 
 
-void main() async {
+Future<void> main() async {
   group('Convert currencies use case tests', () {
     final ConvertRepository repository = MockConvertRepository();
     final useCase = ConvertCurrenciesUseCase(repository);

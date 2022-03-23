@@ -12,7 +12,7 @@ import '../api/convert_api_test.mocks.dart';
 import 'convert_repository_test.mocks.dart';
 
 @GenerateMocks([ConvertRepository])
-void main() async {
+Future<void> main() async {
   group('Convert repository tests', () {
     final ConvertRepository mockRepository = MockConvertRepository();
     final ConvertApi mockConvertApi = MockConvertApi();

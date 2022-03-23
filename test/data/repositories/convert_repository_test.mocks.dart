@@ -31,18 +31,14 @@ class MockConvertRepository extends _i1.Mock implements _i3.ConvertRepository {
   }
 
   @override
-  _i4.Future<_i2.Conversion> convert({
-    double? amount,
-    _i5.Currency? from,
-    _i5.Currency? to,
-    _i6.Output? output,
-  }) =>
+  _i4.Future<_i2.Conversion> convert(
+          {double? amount,
+          _i5.Currency? from,
+          _i5.Currency? to,
+          _i6.Output? output}) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #convert,
-          [],
-          {#amount: amount, #from: from, #to: to, #output: output},
-        ),
-        returnValue: Future<_i2.Conversion>.value(_FakeConversion_0()),
-      ) as _i4.Future<_i2.Conversion>);
+              Invocation.method(#convert, [],
+                  {#amount: amount, #from: from, #to: to, #output: output}),
+              returnValue: Future<_i2.Conversion>.value(_FakeConversion_0()))
+          as _i4.Future<_i2.Conversion>);
 }
