@@ -11,9 +11,19 @@ class ConvertCurrenciesCubit extends Cubit<ConvertCurrenciesState> {
   ConvertCurrenciesCubit(this._convertCurrenciesUseCase)
       : super(const ConvertCurrenciesState());
 
-  Future<void> checkToReady(double? amount, Currency? from, Currency? to) async {
+  Future<void> checkToReady(
+    double? amount,
+    Currency? from,
+    Currency? to,
+  ) async {
     if (amount != null && from != null && to != null) {
-      emit(state.copyWith(amount: amount, from: from, to: to));
+      emit(state.copyWith(
+        amount: amount,
+        from: from,
+        to: to,
+        status: ConvertCurrenciesStatus.ready,
+      ));
+      await convert();
     } else {
       emit(state.copyWith(status: ConvertCurrenciesStatus.notReady));
     }
