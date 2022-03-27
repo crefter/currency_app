@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:currency_app/domain/entities/conversion.dart';
 import 'package:currency_app/domain/entities/currency.dart';
 import 'package:currency_app/domain/usecases/convert_currencies_use_case.dart';
 import 'package:equatable/equatable.dart';
@@ -23,7 +24,6 @@ class ConvertCurrenciesCubit extends Cubit<ConvertCurrenciesState> {
         to: to,
         status: ConvertCurrenciesStatus.ready,
       ));
-      await convert();
     } else {
       emit(state.copyWith(status: ConvertCurrenciesStatus.notReady));
     }
@@ -32,12 +32,15 @@ class ConvertCurrenciesCubit extends Cubit<ConvertCurrenciesState> {
   Future<void> convert() async {
     if (state.status == ConvertCurrenciesStatus.ready) {
       try {
-        await _convertCurrenciesUseCase(
+        final answer = await _convertCurrenciesUseCase(
           amount: state.amount,
           from: state.from,
           to: state.to,
         );
-        emit(state.copyWith(status: ConvertCurrenciesStatus.success));
+        emit(state.copyWith(
+          status: ConvertCurrenciesStatus.success,
+          answer: answer,
+        ));
       } on Exception {
         emit(state.copyWith(status: ConvertCurrenciesStatus.failure));
       }
