@@ -8,10 +8,11 @@ import 'package:provider/src/provider.dart';
 class ChoiceCurrencyWidget extends StatelessWidget {
   final void Function(Currency currency) _onSelected;
 
-  const ChoiceCurrencyWidget(
-    this._onSelected, {
+  const ChoiceCurrencyWidget({
+    required void Function(Currency currency) onSelected,
     Key? key,
-  }) : super(key: key);
+  })  : _onSelected = onSelected,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {

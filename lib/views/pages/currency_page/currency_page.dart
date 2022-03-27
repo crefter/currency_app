@@ -18,7 +18,7 @@ class CurrencyPage extends StatelessWidget {
         child: Column(
           children: [
             ChoiceCurrencyWidget(
-              (currency) => context
+              onSelected: (currency) => context
                   .read<RateBloc>()
                   .add(RateCurrencyChosen(currency.name)),
             ),

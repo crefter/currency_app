@@ -12,15 +12,22 @@ class ChangePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ConvertCurrenciesCubit(GetIt.instance<ConvertCurrenciesUseCase>()),
+      create: (context) =>
+          ConvertCurrenciesCubit(GetIt.instance<ConvertCurrenciesUseCase>()),
       child: Container(
         decoration: const BoxDecoration(color: Colors.red),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ChoiceCurrencyWidget((_) {}),
-            ChoiceCurrencyWidget((_) {}),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              ChoiceCurrencyWidget(
+                onSelected: (_) {},
+              ),
+              ChoiceCurrencyWidget(
+                onSelected: (_) {},
+              ),
+            ],
+          ),
         ),
       ),
     );

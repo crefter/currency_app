@@ -14,6 +14,7 @@ class ConvertCurrenciesState extends Equatable {
   final Currency to;
   final double amount;
   final ConvertCurrenciesStatus status;
+  final Conversion answer;
 
   @override
   List<Object?> get props => [from, to, status];
@@ -23,6 +24,7 @@ class ConvertCurrenciesState extends Equatable {
     this.from = Currency.empty,
     this.to = Currency.empty,
     this.status = ConvertCurrenciesStatus.initial,
+    this.answer = Conversion.empty,
   });
 
   ConvertCurrenciesState copyWith({
@@ -30,12 +32,14 @@ class ConvertCurrenciesState extends Equatable {
     Currency? from,
     Currency? to,
     ConvertCurrenciesStatus? status,
+    Conversion? answer,
   }) {
     return ConvertCurrenciesState(
       amount: amount ?? this.amount,
       from: from ?? this.from,
       to: to ?? this.to,
       status: status ?? this.status,
+      answer: answer ?? this.answer,
     );
   }
 }
