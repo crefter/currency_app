@@ -24,7 +24,7 @@ class ConvertApiImpl implements ConvertApi {
     Output? output,
   }) async {
     final name = output != null ? output.name : 'JSON';
-    final parameters = <String, dynamic>{
+    final  parameters = {
       'amount': amount.toString(),
       'from': from,
       'to': to,
@@ -37,13 +37,13 @@ class ConvertApiImpl implements ConvertApi {
     try {
       response = await _dio.get<Map<String, dynamic>>(_convertEndpoint);
     } on DioError catch (e) {
+      final data = e.response?.data as Map<String, dynamic>;
+      final error = data['error'] as Map<String, dynamic>;
+      final errorCode = error['code'].toString();
+      final errorDescription = error['message'].toString();
       throw ConvertApiException(
-        (e.response as Response<Map<String, dynamic>>)
-            .data!['message']
-            .toString(),
-        (e.response as Response<Map<String, dynamic>>)
-            .data!['errors']
-            .toString(),
+        errorDescription,
+        errorCode,
       );
     }
 

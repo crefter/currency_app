@@ -28,10 +28,10 @@ Future<void> main() async {
 
     /// "ready" is amount != null and from != null and to != null
     test('if "ready" then state status is ready', () async {
-      await convertCurrenciesCubit.checkToReady(
-        10,
-        usd,
-        eur,
+      convertCurrenciesCubit.checkToReady(
+        amount: 10,
+        from: usd,
+        to: eur,
       );
       expect(
         convertCurrenciesCubit.state.status,
@@ -40,10 +40,9 @@ Future<void> main() async {
     });
 
     test('should return state status "not ready" if amount = null', () async {
-      await convertCurrenciesCubit.checkToReady(
-        null,
-        usd,
-        eur,
+      convertCurrenciesCubit.checkToReady(
+        from: usd,
+        to: eur,
       );
       expect(
         convertCurrenciesCubit.state.status,
@@ -52,10 +51,9 @@ Future<void> main() async {
     });
 
     test('should return state status "not ready" if from = null', () async {
-      await convertCurrenciesCubit.checkToReady(
-        10,
-        null,
-        eur,
+      convertCurrenciesCubit.checkToReady(
+        amount: 10,
+        to: eur,
       );
       expect(
         convertCurrenciesCubit.state.status,
@@ -64,10 +62,9 @@ Future<void> main() async {
     });
 
     test('should return state status "not ready" if to = null', () async {
-      await convertCurrenciesCubit.checkToReady(
-        10,
-        usd,
-        null,
+      convertCurrenciesCubit.checkToReady(
+        amount: 10,
+        from: usd,
       );
       expect(
         convertCurrenciesCubit.state.status,

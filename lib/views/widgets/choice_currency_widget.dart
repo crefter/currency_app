@@ -43,12 +43,12 @@ class ChoiceCurrencyWidget extends StatelessWidget {
             },
             onSelected: _onSelected,
             fieldViewBuilder:
-                (context, textEditingController, focusNode, onFieldSubmitted) {
+                (context, controller, focusNode, onFieldSubmitted) {
               return TextFormField(
                 decoration:
                     const InputDecoration(hintText: Strings.enterCurrencyHint),
                 focusNode: focusNode,
-                controller: textEditingController,
+                controller: controller,
                 onFieldSubmitted: (_) => onFieldSubmitted(),
               );
             },

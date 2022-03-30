@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:currency_app/data/errors/convert_api_exception.dart';
 import 'package:currency_app/domain/entities/conversion.dart';
 import 'package:currency_app/domain/entities/currency.dart';
 import 'package:currency_app/domain/usecases/convert_currencies_use_case.dart';
@@ -10,28 +11,34 @@ class ConvertCurrenciesCubit extends Cubit<ConvertCurrenciesState> {
   final ConvertCurrenciesUseCase _convertCurrenciesUseCase;
 
   ConvertCurrenciesCubit(this._convertCurrenciesUseCase)
-      : super(const ConvertCurrenciesState());
+      : super(const ConvertCurrenciesState()) {
+    checkToReady();
+  }
 
-  Future<void> checkToReady(
-    double? amount,
-    Currency? from,
-    Currency? to,
-  ) async {
-    if (amount != null && from != null && to != null) {
+  void checkToReady({
+    double amount = 0,
+    Currency from = Currency.empty,
+    Currency to = Currency.empty,
+  }) {
+    if (amount != 0 && from != Currency.empty && to != Currency.empty) {
+      emit(state.copyWith(
+        status: ConvertCurrenciesStatus.ready,
+      ));
+    } else {
       emit(state.copyWith(
         amount: amount,
         from: from,
         to: to,
-        status: ConvertCurrenciesStatus.ready,
+        status: ConvertCurrenciesStatus.notReady,
       ));
-    } else {
-      emit(state.copyWith(status: ConvertCurrenciesStatus.notReady));
     }
   }
 
   Future<void> convert() async {
-    if (state.status == ConvertCurrenciesStatus.ready) {
+    if (state.status == ConvertCurrenciesStatus.ready ||
+        state.status == ConvertCurrenciesStatus.failure) {
       try {
+        emit(state.copyWith(status: ConvertCurrenciesStatus.converting));
         final answer = await _convertCurrenciesUseCase(
           amount: state.amount,
           from: state.from,
@@ -41,8 +48,11 @@ class ConvertCurrenciesCubit extends Cubit<ConvertCurrenciesState> {
           status: ConvertCurrenciesStatus.success,
           answer: answer,
         ));
-      } on Exception {
-        emit(state.copyWith(status: ConvertCurrenciesStatus.failure));
+      } on ConvertApiException catch (e) {
+        emit(state.copyWith(
+          status: ConvertCurrenciesStatus.failure,
+          exception: e.message,
+        ));
       }
     } else {
       emit(state.copyWith(status: ConvertCurrenciesStatus.notReady));

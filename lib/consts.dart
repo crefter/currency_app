@@ -7,4 +7,6 @@ abstract class Consts {
   static const double heightBetweenCurrencyAndRateWidgets = 50.0;
   static const double defaultBorderRadius = 10.0;
   static const double appBarElevation = 10.0;
+  static const double topPadding = 40;
+  static const double defaultPaddingBetweenWidgets = 30;
 }

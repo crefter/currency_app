@@ -10,6 +10,7 @@ enum ConvertCurrenciesStatus {
 }
 
 class ConvertCurrenciesState extends Equatable {
+  final String exception;
   final Currency from;
   final Currency to;
   final double amount;
@@ -20,6 +21,7 @@ class ConvertCurrenciesState extends Equatable {
   List<Object?> get props => [from, to, status];
 
   const ConvertCurrenciesState({
+    this.exception = '',
     this.amount = 0,
     this.from = Currency.empty,
     this.to = Currency.empty,
@@ -33,6 +35,7 @@ class ConvertCurrenciesState extends Equatable {
     Currency? to,
     ConvertCurrenciesStatus? status,
     Conversion? answer,
+    String? exception,
   }) {
     return ConvertCurrenciesState(
       amount: amount ?? this.amount,
@@ -40,6 +43,7 @@ class ConvertCurrenciesState extends Equatable {
       to: to ?? this.to,
       status: status ?? this.status,
       answer: answer ?? this.answer,
+      exception: exception ?? this.exception,
     );
   }
 }
