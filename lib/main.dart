@@ -2,6 +2,10 @@ import 'package:currency_app/data/api/convert_api.dart';
 import 'package:currency_app/data/api/convert_api_impl.dart';
 import 'package:currency_app/data/api/currency_api.dart';
 import 'package:currency_app/data/api/currency_api_impl.dart';
+import 'package:currency_app/data/datasource/local/convert_local_data_source.dart';
+import 'package:currency_app/data/datasource/local/convert_local_data_source_impl.dart';
+import 'package:currency_app/data/datasource/remote/convert_remote_data_source.dart';
+import 'package:currency_app/data/datasource/remote/convert_remote_data_source_impl.dart';
 import 'package:currency_app/data/repositories/convert_repository_impl.dart';
 import 'package:currency_app/data/repositories/currency_repository_impl.dart';
 import 'package:currency_app/domain/repositories/convert_repository.dart';
@@ -16,6 +20,7 @@ import 'package:currency_app/views/screens/screen_factory/screen_factory.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void setupDependencies() {
   final get = GetIt.instance;
@@ -37,13 +42,25 @@ void setupDependencies() {
       () => ConvertApiImpl(get<Dio>()),
     );
 
+  //data sources
+  get
+    ..registerLazySingleton<ConvertLocalDataSource>(
+      () => ConvertLocalDataSourceImpl(),
+    )
+    ..registerLazySingleton<ConvertRemoteDataSource>(
+      () => ConvertRemoteDataSourceImpl(get<ConvertApi>()),
+    );
+
   //repositories
   get
     ..registerLazySingleton<CurrencyRepository>(
       () => CurrencyRepositoryImpl(get<CurrencyApi>()),
     )
     ..registerLazySingleton<ConvertRepository>(
-      () => ConvertRepositoryImpl(get<ConvertApi>()),
+      () => ConvertRepositoryImpl(
+        get<ConvertLocalDataSource>(),
+        get<ConvertRemoteDataSource>(),
+      ),
     );
 
   //use cases
@@ -64,7 +81,13 @@ void setupDependencies() {
   //blocs
 }
 
-void main() {
+Future<void> initHive() async {
+  await Hive.initFlutter();
+  // Hive.registerAdapter(ConvertResponseAdapter());
+}
+
+Future<void> main() async {
+  await initHive();
   setupDependencies();
   runApp(MyApp());
 }
