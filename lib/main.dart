@@ -6,6 +6,7 @@ import 'package:currency_app/data/datasource/local/convert_local_data_source.dar
 import 'package:currency_app/data/datasource/local/convert_local_data_source_impl.dart';
 import 'package:currency_app/data/datasource/remote/convert_remote_data_source.dart';
 import 'package:currency_app/data/datasource/remote/convert_remote_data_source_impl.dart';
+import 'package:currency_app/data/dto/convert_response.dart';
 import 'package:currency_app/data/repositories/convert_repository_impl.dart';
 import 'package:currency_app/data/repositories/currency_repository_impl.dart';
 import 'package:currency_app/domain/repositories/convert_repository.dart';
@@ -14,6 +15,7 @@ import 'package:currency_app/domain/usecases/convert_currencies_use_case.dart';
 import 'package:currency_app/domain/usecases/find_rates_for_currency_use_case.dart';
 import 'package:currency_app/domain/usecases/load_currencies_use_case.dart';
 import 'package:currency_app/domain/usecases/load_rates_for_currency_use_case.dart';
+import 'package:currency_app/domain/usecases/save_convert_response_use_case.dart';
 import 'package:currency_app/views/my_app.dart';
 import 'package:currency_app/views/navigation/main_navigation.dart';
 import 'package:currency_app/views/screens/screen_factory/screen_factory.dart';
@@ -76,6 +78,9 @@ void setupDependencies() {
     )
     ..registerLazySingleton<ConvertCurrenciesUseCase>(
       () => ConvertCurrenciesUseCase(get<ConvertRepository>()),
+    )
+    ..registerLazySingleton<SaveConvertResponseUseCase>(
+      () => SaveConvertResponseUseCase(get<ConvertRepository>()),
     );
 
   //blocs
@@ -83,7 +88,7 @@ void setupDependencies() {
 
 Future<void> initHive() async {
   await Hive.initFlutter();
-  // Hive.registerAdapter(ConvertResponseAdapter());
+  Hive.registerAdapter(ConvertResponseAdapter());
 }
 
 Future<void> main() async {
