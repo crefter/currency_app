@@ -3,17 +3,19 @@ import 'package:currency_app/data/errors/convert_api_exception.dart';
 import 'package:currency_app/domain/entities/conversion.dart';
 import 'package:currency_app/domain/entities/currency.dart';
 import 'package:currency_app/domain/usecases/convert_currencies_use_case.dart';
+import 'package:currency_app/domain/usecases/save_convert_response_use_case.dart';
 import 'package:equatable/equatable.dart';
 
 part 'convert_currencies_state.dart';
 
 class ConvertCurrenciesCubit extends Cubit<ConvertCurrenciesState> {
   final ConvertCurrenciesUseCase _convertCurrenciesUseCase;
+  final SaveConvertResponseUseCase _saveConvertResponseUseCase;
 
-  ConvertCurrenciesCubit(this._convertCurrenciesUseCase)
-      : super(const ConvertCurrenciesState()) {
-    checkToReady();
-  }
+  ConvertCurrenciesCubit(
+    this._convertCurrenciesUseCase,
+    this._saveConvertResponseUseCase,
+  ) : super(const ConvertCurrenciesState());
 
   void checkToReady({
     double amount = 0,
@@ -48,6 +50,7 @@ class ConvertCurrenciesCubit extends Cubit<ConvertCurrenciesState> {
           status: ConvertCurrenciesStatus.success,
           answer: answer,
         ));
+        await _saveConvertResponseUseCase(answer);
       } on ConvertApiException catch (e) {
         emit(state.copyWith(
           status: ConvertCurrenciesStatus.failure,

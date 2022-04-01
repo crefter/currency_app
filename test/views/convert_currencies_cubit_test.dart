@@ -1,6 +1,8 @@
+import 'package:currency_app/data/errors/convert_api_exception.dart';
 import 'package:currency_app/domain/entities/conversion.dart';
 import 'package:currency_app/domain/entities/currency.dart';
 import 'package:currency_app/domain/usecases/convert_currencies_use_case.dart';
+import 'package:currency_app/domain/usecases/save_convert_response_use_case.dart';
 import 'package:currency_app/views/bloc/convert_currencies/convert_currencies_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -9,15 +11,21 @@ import 'package:mockito/mockito.dart';
 import 'convert_currencies_cubit_test.mocks.dart';
 
 @GenerateMocks([ConvertCurrenciesUseCase])
+@GenerateMocks([SaveConvertResponseUseCase])
 Future<void> main() async {
   group('Convert currencies cubit tests', () {
     late ConvertCurrenciesCubit convertCurrenciesCubit;
-    late MockConvertCurrenciesUseCase mockUseCase;
+    late MockConvertCurrenciesUseCase mockConvertUseCase;
+    late MockSaveConvertResponseUseCase mockSaveConvertResponseUseCase;
     const usd = Currency('USD', 'country');
     const eur = Currency('EUR', 'country');
-    setUp(() {
-      mockUseCase = MockConvertCurrenciesUseCase();
-      convertCurrenciesCubit = ConvertCurrenciesCubit(mockUseCase);
+    setUpAll(() {
+      mockConvertUseCase = MockConvertCurrenciesUseCase();
+      mockSaveConvertResponseUseCase = MockSaveConvertResponseUseCase();
+      convertCurrenciesCubit = ConvertCurrenciesCubit(
+        mockConvertUseCase,
+        mockSaveConvertResponseUseCase,
+      );
     });
     test('initial state status is initial', () {
       expect(
@@ -81,14 +89,17 @@ Future<void> main() async {
           status: ConvertCurrenciesStatus.ready,
         ),
       );
-      when(mockUseCase.call(
+      when(mockConvertUseCase.call(
         amount: anyNamed('amount'),
         from: anyNamed('from'),
         to: anyNamed('to'),
       )).thenAnswer(
         (_) async => const Conversion(10, 'USD', 'EUR', 8),
       );
+      when(mockSaveConvertResponseUseCase.call(any))
+          .thenAnswer((_) async => Future<void>(() {}));
       await convertCurrenciesCubit.convert();
+      verify(mockSaveConvertResponseUseCase.call(any)).called(1);
       expect(
         convertCurrenciesCubit.state.status,
         ConvertCurrenciesStatus.success,
@@ -104,11 +115,11 @@ Future<void> main() async {
           status: ConvertCurrenciesStatus.ready,
         ),
       );
-      when(mockUseCase.call(
+      when(mockConvertUseCase.call(
         amount: anyNamed('amount'),
         from: anyNamed('from'),
         to: anyNamed('to'),
-      )).thenThrow(Exception());
+      )).thenThrow(ConvertApiException('message', 'description'));
       await convertCurrenciesCubit.convert();
       expect(
         convertCurrenciesCubit.state.status,
