@@ -1,7 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:hive/hive.dart';
+
+part 'convert_response.g.dart';
 
 @immutable
+@HiveType(typeId: 1)
 class ConvertResponse {
+  @HiveField(0)
   late final ConversionResponse _conversion;
 
   ConversionResponse get conversion => _conversion;

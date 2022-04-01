@@ -1,7 +1,9 @@
 import 'package:currency_app/consts.dart';
 import 'package:currency_app/domain/usecases/convert_currencies_use_case.dart';
+import 'package:currency_app/domain/usecases/save_convert_response_use_case.dart';
 import 'package:currency_app/strings.dart';
 import 'package:currency_app/views/bloc/convert_currencies/convert_currencies_cubit.dart';
+import 'package:currency_app/views/pages/change_page/widgets/result_widget.dart';
 import 'package:currency_app/views/widgets/choice_currency_widget.dart';
 import 'package:currency_app/views/widgets/decimal_text_field.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +17,10 @@ class ChangePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          ConvertCurrenciesCubit(GetIt.instance<ConvertCurrenciesUseCase>()),
+      create: (context) => ConvertCurrenciesCubit(
+        GetIt.instance<ConvertCurrenciesUseCase>(),
+        GetIt.instance<SaveConvertResponseUseCase>(),
+      ),
       child: BlocBuilder<ConvertCurrenciesCubit, ConvertCurrenciesState>(
         builder: (context, state) {
           return Padding(
@@ -82,10 +86,7 @@ class ChangePage extends StatelessWidget {
                   const SizedBox(
                     height: Consts.defaultPaddingBetweenWidgets,
                   ),
-                  if (state.status == ConvertCurrenciesStatus.failure)
-                    Text(state.exception)
-                  else
-                    Text('Результат: ${state.answer.result}'),
+                  const ResultWidget(),
                 ],
               ),
             ),

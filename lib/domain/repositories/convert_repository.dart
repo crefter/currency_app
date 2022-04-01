@@ -9,4 +9,6 @@ abstract class ConvertRepository {
     required Currency to,
     Output? output,
   });
+
+  Future<void> save(Conversion conversion);
 }
