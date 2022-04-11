@@ -10,4 +10,7 @@ abstract class Strings {
   static const convertLabelTextField = 'Введите количество';
   static const decimalRegExp = r'[0-9]+[,.]{0,1}[0-9]*';
   static const tryOneTime = 'Попробовать еще раз';
+  static const result = 'Результат:';
+  static const getFromCache = '(взято из кэша)';
+  static const waitingInput = 'Ожидаем ввода';
 }
