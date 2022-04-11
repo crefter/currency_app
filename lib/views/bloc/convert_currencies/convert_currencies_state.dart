@@ -17,8 +17,10 @@ class ConvertCurrenciesState extends Equatable {
   final ConvertCurrenciesStatus status;
   final Conversion answer;
 
+  static int number = 0;
+
   @override
-  List<Object?> get props => [from, to, status];
+  List<Object?> get props => [from, to, status, amount, answer, exception];
 
   const ConvertCurrenciesState({
     this.exception = '',
@@ -29,6 +31,13 @@ class ConvertCurrenciesState extends Equatable {
     this.answer = Conversion.empty,
   });
 
+  @override
+  String toString() {
+    return 'ConvertCurrenciesState{exception: $exception, from: '
+        '$from, to: $to, amount: $amount, status: $status, answer: $answer, '
+        'number: $number, exception: $exception}';
+  }
+
   ConvertCurrenciesState copyWith({
     double? amount,
     Currency? from,
@@ -37,6 +46,7 @@ class ConvertCurrenciesState extends Equatable {
     Conversion? answer,
     String? exception,
   }) {
+    number++;
     return ConvertCurrenciesState(
       amount: amount ?? this.amount,
       from: from ?? this.from,

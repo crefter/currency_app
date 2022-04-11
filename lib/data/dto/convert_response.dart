@@ -7,21 +7,17 @@ part 'convert_response.g.dart';
 @HiveType(typeId: 1)
 class ConvertResponse {
   @HiveField(0)
-  late final ConversionResponse _conversion;
-
-  ConversionResponse get conversion => _conversion;
+  late final ConversionResponse conversion;
 
   @override
-  int get hashCode => _conversion.hashCode;
+  int get hashCode => conversion.hashCode;
 
   ConvertResponse({
-    required ConversionResponse conversion,
-  }) {
-    _conversion = conversion;
-  }
+    required this.conversion,
+  });
 
   ConvertResponse.fromJson(Map<String, dynamic> json) {
-    _conversion = ConversionResponse.fromJson(
+    conversion = ConversionResponse.fromJson(
       json['conversion'] as Map<String, dynamic>,
     );
   }
@@ -31,51 +27,43 @@ class ConvertResponse {
       identical(this, other) ||
       other is ConvertResponse &&
           runtimeType == other.runtimeType &&
-          _conversion == other._conversion;
+          conversion == other.conversion;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['conversion'] = _conversion.toJson();
+    map['conversion'] = conversion.toJson();
     return map;
   }
 }
 
 @immutable
+@HiveType(typeId: 2)
 class ConversionResponse {
-  late final double _amount;
-  late final String _from;
-  late final String _to;
-  late final double _result;
-
-  double get amount => _amount;
-
-  String get from => _from;
-
-  String get to => _to;
-
-  double get result => _result;
+  @HiveField(0)
+  late final double amount;
+  @HiveField(1)
+  late final String from;
+  @HiveField(2)
+  late final String to;
+  @HiveField(3)
+  late final double result;
 
   @override
   int get hashCode =>
-      _amount.hashCode ^ _from.hashCode ^ _to.hashCode ^ _result.hashCode;
+      amount.hashCode ^ from.hashCode ^ to.hashCode ^ result.hashCode;
 
   ConversionResponse({
-    required double amount,
-    required String from,
-    required String to,
-    required double result,
-  }) {
-    _amount = amount;
-    _from = from;
-    _to = to;
-    _result = result;
-  }
+    required this.amount,
+    required this.from,
+    required this.to,
+    required this.result,
+  });
 
   ConversionResponse.fromJson(Map<String, dynamic> json) {
-    _amount = json['amount'] as double;
-    _from = json['from'] as String;
-    _to = json['to'] as String;
-    _result = json['result'] as double;
+    amount = json['amount'] as double;
+    from = json['from'] as String;
+    to = json['to'] as String;
+    result = json['result'] as double;
   }
 
   @override
@@ -83,17 +71,17 @@ class ConversionResponse {
       identical(this, other) ||
       other is ConversionResponse &&
           runtimeType == other.runtimeType &&
-          _amount == other._amount &&
-          _from == other._from &&
-          _to == other._to &&
-          _result == other._result;
+          amount == other.amount &&
+          from == other.from &&
+          to == other.to &&
+          result == other.result;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['amount'] = _amount;
-    map['from'] = _from;
-    map['to'] = _to;
-    map['result'] = _result;
+    map['amount'] = amount;
+    map['from'] = from;
+    map['to'] = to;
+    map['result'] = result;
     return map;
   }
 }
