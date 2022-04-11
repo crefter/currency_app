@@ -26,4 +26,9 @@ class Currency {
 
   @override
   int get hashCode => name.hashCode ^ country.hashCode;
+
+  @override
+  String toString() {
+    return 'Currency{name: $name, country: $country}';
+  }
 }
