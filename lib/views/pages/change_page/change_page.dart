@@ -37,7 +37,7 @@ class ChangePage extends StatelessWidget {
                   ChoiceCurrencyWidget(
                     onSelected: (currency) =>
                         context.read<ConvertCurrenciesCubit>().checkToReady(
-                              amount: state.amount,
+                              inputAmount: state.amount.toString(),
                               from: currency,
                               to: state.to,
                             ),
@@ -45,7 +45,7 @@ class ChangePage extends StatelessWidget {
                   ChoiceCurrencyWidget(
                     onSelected: (currency) =>
                         context.read<ConvertCurrenciesCubit>().checkToReady(
-                              amount: state.amount,
+                              inputAmount: state.amount.toString(),
                               from: state.from,
                               to: currency,
                             ),
@@ -58,7 +58,7 @@ class ChangePage extends StatelessWidget {
                     hintText: Strings.convertHintTextField,
                     onChanged: (value) =>
                         context.read<ConvertCurrenciesCubit>().checkToReady(
-                              amount: double.tryParse(value) ?? 0,
+                              inputAmount: value,
                               from: state.from,
                               to: state.to,
                             ),
@@ -72,7 +72,8 @@ class ChangePage extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: state.status ==
                                   ConvertCurrenciesStatus.ready ||
-                              state.status == ConvertCurrenciesStatus.failure
+                              state.status == ConvertCurrenciesStatus.failure ||
+                              state.status == ConvertCurrenciesStatus.success
                           ? () =>
                               context.read<ConvertCurrenciesCubit>().convert()
                           : null,
