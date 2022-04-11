@@ -9,6 +9,7 @@ import 'package:currency_app/data/datasource/remote/convert_remote_data_source_i
 import 'package:currency_app/data/dto/convert_response.dart';
 import 'package:currency_app/data/repositories/convert_repository_impl.dart';
 import 'package:currency_app/data/repositories/currency_repository_impl.dart';
+import 'package:currency_app/domain/entities/conversion.dart';
 import 'package:currency_app/domain/repositories/convert_repository.dart';
 import 'package:currency_app/domain/repositories/currency_repository.dart';
 import 'package:currency_app/domain/usecases/convert_currencies_use_case.dart';
@@ -88,11 +89,15 @@ void setupDependencies() {
 
 Future<void> initHive() async {
   await Hive.initFlutter();
-  Hive.registerAdapter(ConvertResponseAdapter());
+  Hive
+    ..registerAdapter(ConvertResponseAdapter())
+    ..registerAdapter(ConversionResponseAdapter());
 }
 
 Future<void> main() async {
   await initHive();
   setupDependencies();
+  final saveUseCase = GetIt.instance<SaveConvertResponseUseCase>();
+  await saveUseCase.call(const Conversion(10, 'USD', 'EUR', 8));
   runApp(MyApp());
 }
