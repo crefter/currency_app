@@ -22,11 +22,15 @@ Future<void> main() async {
     setUpAll(() {
       mockConvertUseCase = MockConvertCurrenciesUseCase();
       mockSaveConvertResponseUseCase = MockSaveConvertResponseUseCase();
+    });
+
+    setUp(() {
       convertCurrenciesCubit = ConvertCurrenciesCubit(
         mockConvertUseCase,
         mockSaveConvertResponseUseCase,
       );
     });
+
     test('initial state status is initial', () {
       expect(
         convertCurrenciesCubit.state.status,
