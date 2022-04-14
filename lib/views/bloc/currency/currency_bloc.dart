@@ -4,17 +4,15 @@ import 'package:bloc/bloc.dart';
 import 'package:currency_app/domain/entities/currency.dart';
 import 'package:currency_app/domain/usecases/load_currencies_use_case.dart';
 import 'package:equatable/equatable.dart';
-import 'package:get_it/get_it.dart';
 
 part 'currency_event.dart';
 
 part 'currency_state.dart';
 
 class CurrencyBloc extends Bloc<CurrencyEvent, CurrencyState> {
-  final LoadCurrenciesUseCase _loadCurrenciesUseCase =
-      GetIt.instance<LoadCurrenciesUseCase>();
+  final LoadCurrenciesUseCase _loadCurrenciesUseCase;
 
-  CurrencyBloc() : super(CurrencyInitial()) {
+  CurrencyBloc(this._loadCurrenciesUseCase) : super(CurrencyInitial()) {
     on<CurrencyAppStarted>(
       _onCurrencyAppStarted,
     );
@@ -28,7 +26,11 @@ class CurrencyBloc extends Bloc<CurrencyEvent, CurrencyState> {
     CurrencyAppStarted event,
     Emitter<CurrencyState> emit,
   ) async {
-    emit(CurrencyLoaded(await _loadCurrenciesUseCase()));
+    try {
+      emit(CurrencyLoaded(await _loadCurrenciesUseCase()));
+    } on Exception catch (e) {
+      emit(CurrencyError(e.toString()));
+    }
   }
 
   FutureOr<void> _onCurrencySelectEnded(

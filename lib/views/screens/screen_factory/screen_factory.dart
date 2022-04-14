@@ -1,4 +1,5 @@
 import 'package:currency_app/domain/usecases/find_rates_for_currency_use_case.dart';
+import 'package:currency_app/domain/usecases/load_currencies_use_case.dart';
 import 'package:currency_app/domain/usecases/load_rates_for_currency_use_case.dart';
 import 'package:currency_app/views/bloc/currency/currency_bloc.dart';
 import 'package:currency_app/views/bloc/rate/rate_bloc.dart';
@@ -18,7 +19,9 @@ class ScreenFactory {
           ),
         ),
         BlocProvider(
-          create: (_) => CurrencyBloc(),
+          create: (_) => CurrencyBloc(
+            GetIt.instance<LoadCurrenciesUseCase>(),
+          ),
         ),
       ],
       child: const MainScreen(),
