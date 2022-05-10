@@ -62,7 +62,7 @@ Future<void> main() async {
         from: anyNamed('from'),
         to: anyNamed('to'),
         output: anyNamed('output'),
-      )).thenAnswer((_) async => ConvertResponse(
+      )).thenAnswer((_) async => const ConvertResponse(
             conversion: ConversionResponse(
               amount: 10,
               from: 'USD',
@@ -90,7 +90,7 @@ Future<void> main() async {
         from: anyNamed('from'),
         to: anyNamed('to'),
         output: anyNamed('output'),
-      )).thenAnswer((realInvocation) async => ConvertResponse(
+      )).thenAnswer((realInvocation) async => const ConvertResponse(
             conversion: ConversionResponse(
               amount: 10,
               from: 'USD',

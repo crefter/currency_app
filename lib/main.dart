@@ -83,8 +83,6 @@ void setupDependencies() {
     ..registerLazySingleton<SaveConvertResponseUseCase>(
       () => SaveConvertResponseUseCase(get<ConvertRepository>()),
     );
-
-  //blocs
 }
 
 Future<void> initHive() async {

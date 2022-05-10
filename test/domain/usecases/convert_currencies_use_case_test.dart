@@ -18,7 +18,7 @@ Future<void> main() async {
       const usd = Currency('USD', '');
       const eur = Currency('EUR', '');
       when(repository.convert(
-        amount: 10,
+        amount: amount,
         from: usd,
         to: eur,
         output: anyNamed('output'),
