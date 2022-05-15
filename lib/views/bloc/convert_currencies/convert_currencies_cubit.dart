@@ -5,14 +5,14 @@ import 'package:currency_app/data/errors/convert_api_exception.dart';
 import 'package:currency_app/domain/entities/conversion.dart';
 import 'package:currency_app/domain/entities/currency.dart';
 import 'package:currency_app/domain/usecases/convert_currencies_use_case.dart';
-import 'package:currency_app/domain/usecases/save_convert_response_use_case.dart';
+import 'package:currency_app/domain/usecases/save_convertion_response_use_case.dart';
 import 'package:equatable/equatable.dart';
 
 part 'convert_currencies_state.dart';
 
 class ConvertCurrenciesCubit extends Cubit<ConvertCurrenciesState> {
   final ConvertCurrenciesUseCase _convertCurrenciesUseCase;
-  final SaveConvertResponseUseCase _saveConvertResponseUseCase;
+  final SaveConvertionResponseUseCase _saveConvertResponseUseCase;
 
   ConvertCurrenciesCubit(
     this._convertCurrenciesUseCase,

@@ -8,7 +8,7 @@ import 'package:currency_app/domain/entities/conversion.dart' as _i2;
 import 'package:currency_app/domain/entities/currency.dart' as _i5;
 import 'package:currency_app/domain/usecases/convert_currencies_use_case.dart'
     as _i3;
-import 'package:currency_app/domain/usecases/save_convert_response_use_case.dart'
+import 'package:currency_app/domain/usecases/save_convertion_response_use_case.dart'
     as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -46,7 +46,7 @@ class MockConvertCurrenciesUseCase extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSaveConvertResponseUseCase extends _i1.Mock
-    implements _i6.SaveConvertResponseUseCase {
+    implements _i6.SaveConvertionResponseUseCase {
   MockSaveConvertResponseUseCase() {
     _i1.throwOnMissingStub(this);
   }

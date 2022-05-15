@@ -1,6 +1,6 @@
 import 'package:currency_app/consts.dart';
 import 'package:currency_app/domain/usecases/convert_currencies_use_case.dart';
-import 'package:currency_app/domain/usecases/save_convert_response_use_case.dart';
+import 'package:currency_app/domain/usecases/save_convertion_response_use_case.dart';
 import 'package:currency_app/strings.dart';
 import 'package:currency_app/views/bloc/convert_currencies/convert_currencies_cubit.dart';
 import 'package:currency_app/views/pages/change_page/widgets/result_widget.dart';
@@ -19,7 +19,7 @@ class ChangePage extends StatelessWidget {
     return BlocProvider(
       create: (context) => ConvertCurrenciesCubit(
         GetIt.instance<ConvertCurrenciesUseCase>(),
-        GetIt.instance<SaveConvertResponseUseCase>(),
+        GetIt.instance<SaveConvertionResponseUseCase>(),
       ),
       child: BlocBuilder<ConvertCurrenciesCubit, ConvertCurrenciesState>(
         builder: (context, state) {

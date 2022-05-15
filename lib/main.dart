@@ -16,7 +16,7 @@ import 'package:currency_app/domain/usecases/convert_currencies_use_case.dart';
 import 'package:currency_app/domain/usecases/find_rates_for_currency_use_case.dart';
 import 'package:currency_app/domain/usecases/load_currencies_use_case.dart';
 import 'package:currency_app/domain/usecases/load_rates_for_currency_use_case.dart';
-import 'package:currency_app/domain/usecases/save_convert_response_use_case.dart';
+import 'package:currency_app/domain/usecases/save_convertion_response_use_case.dart';
 import 'package:currency_app/views/my_app.dart';
 import 'package:currency_app/views/navigation/main_navigation.dart';
 import 'package:currency_app/views/screens/screen_factory/screen_factory.dart';
@@ -80,8 +80,8 @@ void setupDependencies() {
     ..registerLazySingleton<ConvertCurrenciesUseCase>(
       () => ConvertCurrenciesUseCase(get<ConvertRepository>()),
     )
-    ..registerLazySingleton<SaveConvertResponseUseCase>(
-      () => SaveConvertResponseUseCase(get<ConvertRepository>()),
+    ..registerLazySingleton<SaveConvertionResponseUseCase>(
+      () => SaveConvertionResponseUseCase(get<ConvertRepository>()),
     );
 }
 
@@ -95,7 +95,7 @@ Future<void> initHive() async {
 Future<void> main() async {
   await initHive();
   setupDependencies();
-  final saveUseCase = GetIt.instance<SaveConvertResponseUseCase>();
+  final saveUseCase = GetIt.instance<SaveConvertionResponseUseCase>();
   await saveUseCase.call(const Conversion(10, 'USD', 'EUR', 8));
   runApp(MyApp());
 }

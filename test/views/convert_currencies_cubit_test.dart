@@ -2,7 +2,7 @@ import 'package:currency_app/data/errors/convert_api_exception.dart';
 import 'package:currency_app/domain/entities/conversion.dart';
 import 'package:currency_app/domain/entities/currency.dart';
 import 'package:currency_app/domain/usecases/convert_currencies_use_case.dart';
-import 'package:currency_app/domain/usecases/save_convert_response_use_case.dart';
+import 'package:currency_app/domain/usecases/save_convertion_response_use_case.dart';
 import 'package:currency_app/views/bloc/convert_currencies/convert_currencies_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -11,7 +11,7 @@ import 'package:mockito/mockito.dart';
 import 'convert_currencies_cubit_test.mocks.dart';
 
 @GenerateMocks([ConvertCurrenciesUseCase])
-@GenerateMocks([SaveConvertResponseUseCase])
+@GenerateMocks([SaveConvertionResponseUseCase])
 Future<void> main() async {
   group('Convert currencies cubit tests', () {
     late ConvertCurrenciesCubit convertCurrenciesCubit;
@@ -124,7 +124,7 @@ Future<void> main() async {
         amount: anyNamed('amount'),
         from: anyNamed('from'),
         to: anyNamed('to'),
-      )).thenThrow(ConvertApiException('message', 'description'));
+      )).thenThrow(const ConvertApiException('message', 'description'));
       await convertCurrenciesCubit.convert();
       expect(
         convertCurrenciesCubit.state.status,
