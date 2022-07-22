@@ -1,23 +1,10 @@
 part of 'rate_bloc.dart';
 
-abstract class RateEvent extends Equatable {
-  const RateEvent();
-}
+@freezed
+class RateEvent with _$RateEvent {
+  const factory RateEvent.currencyChosen(final String currencyName) =
+      RateEventCurrencyChosen;
 
-class RateCurrencyChosen extends RateEvent {
-  final String currencyName;
-
-  RateCurrencyChosen(this.currencyName);
-
-  @override
-  List<Object?> get props => [currencyName];
-}
-
-class RateFoundStarted extends RateEvent {
-  final String query;
-
-  RateFoundStarted(this.query);
-
-  @override
-  List<Object?> get props => [query];
+  const factory RateEvent.foundStarted(final String query) =
+      RateEventFoundStarted;
 }

@@ -17,17 +17,13 @@ class RatesListWidget extends StatelessWidget {
       constraints: const BoxConstraints(maxHeight: Consts.heightRatesList),
       child: BlocBuilder<RateBloc, RateState>(
         builder: (context, state) {
-          if (state is RateLoading) {
-            return const RateLoadingWidget();
-          } else if (state is RateLoaded) {
-            final rates = state.rates;
-            return RateLoadedWidget(rates: rates);
-          } else if (state is RateError) {
-            return RateErrorWidget(
-              errorMessage: state.errorMessage,
-            );
-          }
-          return const SizedBox.shrink();
+          return state.when(
+            initial: () => const SizedBox.shrink(),
+            loading: () => const RateLoadingWidget(),
+            loaded: (rates) => RateLoadedWidget(rates: rates),
+            error: (errorMessage) =>
+                RateErrorWidget(errorMessage: errorMessage),
+          );
         },
       ),
     );

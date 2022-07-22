@@ -1,33 +1,12 @@
 part of 'rate_bloc.dart';
 
-abstract class RateState extends Equatable {
-  const RateState();
-}
+@freezed
+class RateState with _$RateState {
+  const factory RateState.initial() = RateStateInitial;
 
-class RateInitial extends RateState {
-  @override
-  List<Object> get props => [];
-}
+  const factory RateState.loading() = RateStateLoading;
 
-class RateLoading extends RateState {
-  @override
-  List<Object?> get props => [];
-}
+  const factory RateState.loaded(final List<Rate> rates) = RateStateLoaded;
 
-class RateLoaded extends RateState {
-  final List<Rate> rates;
-
-  const RateLoaded(this.rates);
-
-  @override
-  List<Object?> get props => [rates];
-}
-
-class RateError extends RateState {
-  final String errorMessage;
-
-  const RateError(this.errorMessage);
-
-  @override
-  List<Object?> get props => [errorMessage];
+  const factory RateState.error(final String errorMessage) = RateStateError;
 }

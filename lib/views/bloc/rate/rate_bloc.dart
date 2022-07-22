@@ -4,11 +4,13 @@ import 'package:currency_app/data/errors/currency_api_exception.dart';
 import 'package:currency_app/domain/entities/rate.dart';
 import 'package:currency_app/domain/usecases/find_rates_for_currency_use_case.dart';
 import 'package:currency_app/domain/usecases/load_rates_for_currency_use_case.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'rate_event.dart';
 
 part 'rate_state.dart';
+
+part 'rate_bloc.freezed.dart';
 
 class RateBloc extends Bloc<RateEvent, RateState> {
   final LoadRatesForCurrencyUseCase _loadRatesForCurrencyUseCase;
@@ -18,44 +20,44 @@ class RateBloc extends Bloc<RateEvent, RateState> {
   RateBloc(
     this._loadRatesForCurrencyUseCase,
     this._findRatesForCurrencyUseCase,
-  ) : super(RateInitial()) {
-    on<RateCurrencyChosen>(
+  ) : super(const RateState.initial()) {
+    on<RateEventCurrencyChosen>(
       _onRateCurrencyChosen,
     );
-    on<RateFoundStarted>(
+    on<RateEventFoundStarted>(
       _onRateFoundStarted,
     );
   }
 
   Future<void> _onRateCurrencyChosen(
-    RateCurrencyChosen event,
+    RateEventCurrencyChosen event,
     Emitter<RateState> emit,
   ) async {
     if (event.currencyName.isNotEmpty) {
-      emit(RateLoading());
+      emit(const RateState.loading());
       try {
         final rates =
             await _loadRatesForCurrencyUseCase(currency: event.currencyName);
         _rates = rates;
-        emit(RateLoaded(rates));
+        emit(RateState.loaded(rates));
       } on CurrencyApiException catch (e) {
-        emit(RateError(
+        emit(RateState.error(
           '${e.description} (code of exception: ${e.code.toString()})',
         ));
       }
     } else {
-      emit(const RateError('Something went wrong!'));
+      emit(const RateState.error('Something went wrong!'));
     }
   }
 
   Future<void> _onRateFoundStarted(
-    RateFoundStarted event,
+    RateEventFoundStarted event,
     Emitter<RateState> emit,
   ) async {
-    if (state is RateLoaded) {
+    if (state is RateStateLoaded) {
       final currency = event.query;
       final rates = await _findRatesForCurrencyUseCase(currency, _rates);
-      emit(RateLoaded(rates));
+      emit(RateState.loaded(rates));
     }
   }
 }
