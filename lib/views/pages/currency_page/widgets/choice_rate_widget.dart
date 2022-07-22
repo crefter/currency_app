@@ -28,7 +28,7 @@ class ChoiceRateWidget extends StatelessWidget {
                   hintText: Strings.enterCurrencyHint,
                 ),
                 onChanged: (text) {
-                  context.read<RateBloc>().add(RateFoundStarted(text));
+                  context.read<RateBloc>().add(RateEventFoundStarted(text));
                 },
               ),
             ],

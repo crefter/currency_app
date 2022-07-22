@@ -3,6 +3,7 @@ import 'package:currency_app/domain/usecases/convert_currencies_use_case.dart';
 import 'package:currency_app/domain/usecases/save_convertion_response_use_case.dart';
 import 'package:currency_app/strings.dart';
 import 'package:currency_app/views/bloc/convert_currencies/convert_currencies_cubit.dart';
+import 'package:currency_app/views/pages/change_page/widgets/convert_button.dart';
 import 'package:currency_app/views/pages/change_page/widgets/result_widget.dart';
 import 'package:currency_app/views/widgets/choice_currency_widget.dart';
 import 'package:currency_app/views/widgets/decimal_text_field.dart';
@@ -66,24 +67,7 @@ class ChangePage extends StatelessWidget {
                   const SizedBox(
                     height: Consts.defaultPaddingBetweenWidgets,
                   ),
-                  SizedBox(
-                    width: 180,
-                    height: 45,
-                    child: ElevatedButton(
-                      onPressed: state.status ==
-                                  ConvertCurrenciesStatus.ready ||
-                              state.status == ConvertCurrenciesStatus.failure ||
-                              state.status == ConvertCurrenciesStatus.success
-                          ? () =>
-                              context.read<ConvertCurrenciesCubit>().convert()
-                          : null,
-                      child: state.status == ConvertCurrenciesStatus.converting
-                          ? const CircularProgressIndicator.adaptive()
-                          : state.status == ConvertCurrenciesStatus.failure
-                              ? const Text(Strings.tryOneTime)
-                              : const Text(Strings.convertButtonText),
-                    ),
-                  ),
+                  ConvertButton(state: state),
                   const SizedBox(
                     height: Consts.defaultPaddingBetweenWidgets,
                   ),

@@ -34,7 +34,7 @@ class ChoiceCurrencyWidget extends StatelessWidget {
               if (query.isEmpty) {
                 return const Iterable<Currency>.empty();
               } else {
-                if (state is CurrencyLoaded) {
+                if (state is CurrencyStateLoaded) {
                   return state.currencies.where((element) =>
                       element.name.toLowerCase().contains(query.toLowerCase()));
                 }
