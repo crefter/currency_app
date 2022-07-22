@@ -6,9 +6,10 @@ import 'package:currency_app/domain/entities/conversion.dart';
 import 'package:currency_app/domain/entities/currency.dart';
 import 'package:currency_app/domain/usecases/convert_currencies_use_case.dart';
 import 'package:currency_app/domain/usecases/save_convertion_response_use_case.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'convert_currencies_state.dart';
+part 'convert_currencies_cubit.freezed.dart';
 
 class ConvertCurrenciesCubit extends Cubit<ConvertCurrenciesState> {
   final ConvertCurrenciesUseCase _convertCurrenciesUseCase;
@@ -39,7 +40,7 @@ class ConvertCurrenciesCubit extends Cubit<ConvertCurrenciesState> {
       log(state.toString());
     } else {
       emit(state.copyWith(
-        amount: amount,
+        amount: amount ?? 0,
         from: from,
         to: to,
         answer: state.answer,
@@ -77,7 +78,7 @@ class ConvertCurrenciesCubit extends Cubit<ConvertCurrenciesState> {
           to: state.to,
           answer: state.answer,
           status: ConvertCurrenciesStatus.failure,
-          exception: e.message,
+          exception: e.message ?? '',
         ));
         log(state.toString());
       }

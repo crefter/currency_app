@@ -16,12 +16,12 @@ Future<void> main() async {
   group('Convert currencies cubit tests', () {
     late ConvertCurrenciesCubit convertCurrenciesCubit;
     late MockConvertCurrenciesUseCase mockConvertUseCase;
-    late MockSaveConvertResponseUseCase mockSaveConvertResponseUseCase;
+    late MockSaveConvertionResponseUseCase mockSaveConvertResponseUseCase;
     const usd = Currency('USD', 'country');
     const eur = Currency('EUR', 'country');
     setUpAll(() {
       mockConvertUseCase = MockConvertCurrenciesUseCase();
-      mockSaveConvertResponseUseCase = MockSaveConvertResponseUseCase();
+      mockSaveConvertResponseUseCase = MockSaveConvertionResponseUseCase();
     });
 
     setUp(() {
