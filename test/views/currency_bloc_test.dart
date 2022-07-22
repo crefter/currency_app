@@ -24,7 +24,7 @@ void main() {
           (_) async => list,
         );
         currencyBloc = CurrencyBloc(loadCurrenciesUseCase);
-        expect(currencyBloc.state, CurrencyInitial());
+        expect(currencyBloc.state, const CurrencyState.initial());
       },
     );
     group('OnCurrencyAppStarted', () {
@@ -35,7 +35,7 @@ void main() {
         currencyBloc = CurrencyBloc(loadCurrenciesUseCase)
           ..add(CurrencyAppStarted());
         await Future.delayed(const Duration(milliseconds: 10), () {});
-        expect(currencyBloc.state, const CurrencyLoaded(list));
+        expect(currencyBloc.state, const CurrencyState.loaded(list));
       });
 
       test('should return state CurrencyError if get Exception', () async {
@@ -43,9 +43,9 @@ void main() {
           Exception('message'),
         );
         currencyBloc = CurrencyBloc(loadCurrenciesUseCase)
-          ..add(CurrencyAppStarted());
+          ..add(const CurrencyAppStarted());
         await Future.delayed(const Duration(milliseconds: 10), () {});
-        expect(currencyBloc.state, const CurrencyError('Exception: message'));
+        expect(currencyBloc.state, const CurrencyState.error('Exception: message'));
       });
     });
   });

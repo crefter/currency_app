@@ -1,19 +1,7 @@
 part of 'currency_bloc.dart';
 
-abstract class CurrencyEvent extends Equatable {
-  const CurrencyEvent();
-}
-
-class CurrencyAppStarted extends CurrencyEvent {
-  @override
-  List<Object?> get props => [];
-}
-
-class CurrencySelectEnded extends CurrencyEvent {
-  final Currency selected;
-
-  @override
-  List<Object?> get props => [selected];
-
-  const CurrencySelectEnded(this.selected);
+@freezed
+class CurrencyEvent with _$CurrencyEvent {
+  const factory CurrencyEvent.appStarted() = CurrencyAppStarted;
+  const factory CurrencyEvent.selectEnded(final Currency selected) = CurrencySelectEnded;
 }

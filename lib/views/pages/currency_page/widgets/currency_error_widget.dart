@@ -10,7 +10,7 @@ class CurrencyErrorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final errorMessage = context.select<CurrencyBloc, String>((bloc) {
-      final state = bloc.state as CurrencyError;
+      final state = bloc.state as CurrencyStateError;
       return state.errorMessage;
     });
     return Container(

@@ -20,7 +20,7 @@ class CurrencyPage extends StatelessWidget {
             ChoiceCurrencyWidget(
               onSelected: (currency) => context
                   .read<RateBloc>()
-                  .add(RateCurrencyChosen(currency.name)),
+                  .add(RateEvent.currencyChosen(currency.name)),
             ),
             const SizedBox(
               height: Consts.heightBetweenCurrencyAndRateWidgets,
