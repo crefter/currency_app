@@ -19,9 +19,10 @@ class RatesListWidget extends StatelessWidget {
         builder: (context, state) {
           return state.when(
             initial: () => const SizedBox.shrink(),
-            loading: () => const RateLoadingWidget(),
-            loaded: (rates) => RateLoadedWidget(rates: rates),
-            error: (errorMessage) =>
+            loading: (_, __) => const RateLoadingWidget(),
+            loaded: (_, filteredRates) =>
+                RateLoadedWidget(rates: filteredRates),
+            error: (__, _, errorMessage) =>
                 RateErrorWidget(errorMessage: errorMessage),
           );
         },
