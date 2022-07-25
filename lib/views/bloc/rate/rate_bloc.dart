@@ -15,7 +15,6 @@ part 'rate_bloc.freezed.dart';
 class RateBloc extends Bloc<RateEvent, RateState> {
   final LoadRatesForCurrencyUseCase _loadRatesForCurrencyUseCase;
   final FindRatesForCurrencyUseCase _findRatesForCurrencyUseCase;
-  List<Rate> _rates = [];
 
   RateBloc(
     this._loadRatesForCurrencyUseCase,
@@ -34,19 +33,30 @@ class RateBloc extends Bloc<RateEvent, RateState> {
     Emitter<RateState> emit,
   ) async {
     if (event.currencyName.isNotEmpty) {
-      emit(const RateState.loading());
+      emit(RateState.loading(
+        state.rates,
+        state.filteredRates,
+      ));
       try {
         final rates =
             await _loadRatesForCurrencyUseCase(currency: event.currencyName);
-        _rates = rates;
-        emit(RateState.loaded(rates));
+        emit(RateState.loaded(
+          rates,
+          rates,
+        ));
       } on CurrencyApiException catch (e) {
         emit(RateState.error(
+          state.rates,
+          state.filteredRates,
           '${e.description} (code of exception: ${e.code.toString()})',
         ));
       }
     } else {
-      emit(const RateState.error('Something went wrong!'));
+      emit(RateState.error(
+        state.rates,
+        state.filteredRates,
+        'Something went wrong!',
+      ));
     }
   }
 
@@ -56,8 +66,9 @@ class RateBloc extends Bloc<RateEvent, RateState> {
   ) async {
     if (state is RateStateLoaded) {
       final currency = event.query;
-      final rates = await _findRatesForCurrencyUseCase(currency, _rates);
-      emit(RateState.loaded(rates));
+      final filteredRates =
+          await _findRatesForCurrencyUseCase(currency, state.rates);
+      emit(RateState.loaded(state.rates, filteredRates));
     }
   }
 }

@@ -350,25 +350,33 @@ mixin _$RateState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<Rate> rates) loaded,
-    required TResult Function(String errorMessage) error,
+    required TResult Function(List<Rate> rates, List<Rate> filteredRates)
+        loading,
+    required TResult Function(List<Rate> rates, List<Rate> filteredRates)
+        loaded,
+    required TResult Function(
+            List<Rate> rates, List<Rate> filteredRates, String errorMessage)
+        error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<Rate> rates)? loaded,
-    TResult Function(String errorMessage)? error,
+    TResult Function(List<Rate> rates, List<Rate> filteredRates)? loading,
+    TResult Function(List<Rate> rates, List<Rate> filteredRates)? loaded,
+    TResult Function(
+            List<Rate> rates, List<Rate> filteredRates, String errorMessage)?
+        error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<Rate> rates)? loaded,
-    TResult Function(String errorMessage)? error,
+    TResult Function(List<Rate> rates, List<Rate> filteredRates)? loading,
+    TResult Function(List<Rate> rates, List<Rate> filteredRates)? loaded,
+    TResult Function(
+            List<Rate> rates, List<Rate> filteredRates, String errorMessage)?
+        error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -435,8 +443,8 @@ class __$$RateStateInitialCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RateStateInitial implements RateStateInitial {
-  const _$RateStateInitial();
+class _$RateStateInitial extends RateStateInitial {
+  const _$RateStateInitial() : super._();
 
   @override
   String toString() {
@@ -456,9 +464,13 @@ class _$RateStateInitial implements RateStateInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<Rate> rates) loaded,
-    required TResult Function(String errorMessage) error,
+    required TResult Function(List<Rate> rates, List<Rate> filteredRates)
+        loading,
+    required TResult Function(List<Rate> rates, List<Rate> filteredRates)
+        loaded,
+    required TResult Function(
+            List<Rate> rates, List<Rate> filteredRates, String errorMessage)
+        error,
   }) {
     return initial();
   }
@@ -467,9 +479,11 @@ class _$RateStateInitial implements RateStateInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<Rate> rates)? loaded,
-    TResult Function(String errorMessage)? error,
+    TResult Function(List<Rate> rates, List<Rate> filteredRates)? loading,
+    TResult Function(List<Rate> rates, List<Rate> filteredRates)? loaded,
+    TResult Function(
+            List<Rate> rates, List<Rate> filteredRates, String errorMessage)?
+        error,
   }) {
     return initial?.call();
   }
@@ -478,9 +492,11 @@ class _$RateStateInitial implements RateStateInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<Rate> rates)? loaded,
-    TResult Function(String errorMessage)? error,
+    TResult Function(List<Rate> rates, List<Rate> filteredRates)? loading,
+    TResult Function(List<Rate> rates, List<Rate> filteredRates)? loaded,
+    TResult Function(
+            List<Rate> rates, List<Rate> filteredRates, String errorMessage)?
+        error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -527,8 +543,9 @@ class _$RateStateInitial implements RateStateInitial {
   }
 }
 
-abstract class RateStateInitial implements RateState {
+abstract class RateStateInitial extends RateState {
   const factory RateStateInitial() = _$RateStateInitial;
+  const RateStateInitial._() : super._();
 }
 
 /// @nodoc
@@ -536,6 +553,7 @@ abstract class _$$RateStateLoadingCopyWith<$Res> {
   factory _$$RateStateLoadingCopyWith(
           _$RateStateLoading value, $Res Function(_$RateStateLoading) then) =
       __$$RateStateLoadingCopyWithImpl<$Res>;
+  $Res call({List<Rate> rates, List<Rate> filteredRates});
 }
 
 /// @nodoc
@@ -548,60 +566,115 @@ class __$$RateStateLoadingCopyWithImpl<$Res>
 
   @override
   _$RateStateLoading get _value => super._value as _$RateStateLoading;
+
+  @override
+  $Res call({
+    Object? rates = freezed,
+    Object? filteredRates = freezed,
+  }) {
+    return _then(_$RateStateLoading(
+      rates == freezed
+          ? _value._rates
+          : rates // ignore: cast_nullable_to_non_nullable
+              as List<Rate>,
+      filteredRates == freezed
+          ? _value._filteredRates
+          : filteredRates // ignore: cast_nullable_to_non_nullable
+              as List<Rate>,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$RateStateLoading implements RateStateLoading {
-  const _$RateStateLoading();
+class _$RateStateLoading extends RateStateLoading {
+  const _$RateStateLoading(
+      final List<Rate> rates, final List<Rate> filteredRates)
+      : _rates = rates,
+        _filteredRates = filteredRates,
+        super._();
+
+  final List<Rate> _rates;
+  @override
+  List<Rate> get rates {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_rates);
+  }
+
+  final List<Rate> _filteredRates;
+  @override
+  List<Rate> get filteredRates {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_filteredRates);
+  }
 
   @override
   String toString() {
-    return 'RateState.loading()';
+    return 'RateState.loading(rates: $rates, filteredRates: $filteredRates)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$RateStateLoading);
+        (other.runtimeType == runtimeType &&
+            other is _$RateStateLoading &&
+            const DeepCollectionEquality().equals(other._rates, _rates) &&
+            const DeepCollectionEquality()
+                .equals(other._filteredRates, _filteredRates));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_rates),
+      const DeepCollectionEquality().hash(_filteredRates));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$RateStateLoadingCopyWith<_$RateStateLoading> get copyWith =>
+      __$$RateStateLoadingCopyWithImpl<_$RateStateLoading>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<Rate> rates) loaded,
-    required TResult Function(String errorMessage) error,
+    required TResult Function(List<Rate> rates, List<Rate> filteredRates)
+        loading,
+    required TResult Function(List<Rate> rates, List<Rate> filteredRates)
+        loaded,
+    required TResult Function(
+            List<Rate> rates, List<Rate> filteredRates, String errorMessage)
+        error,
   }) {
-    return loading();
+    return loading(rates, filteredRates);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<Rate> rates)? loaded,
-    TResult Function(String errorMessage)? error,
+    TResult Function(List<Rate> rates, List<Rate> filteredRates)? loading,
+    TResult Function(List<Rate> rates, List<Rate> filteredRates)? loaded,
+    TResult Function(
+            List<Rate> rates, List<Rate> filteredRates, String errorMessage)?
+        error,
   }) {
-    return loading?.call();
+    return loading?.call(rates, filteredRates);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<Rate> rates)? loaded,
-    TResult Function(String errorMessage)? error,
+    TResult Function(List<Rate> rates, List<Rate> filteredRates)? loading,
+    TResult Function(List<Rate> rates, List<Rate> filteredRates)? loaded,
+    TResult Function(
+            List<Rate> rates, List<Rate> filteredRates, String errorMessage)?
+        error,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading();
+      return loading(rates, filteredRates);
     }
     return orElse();
   }
@@ -644,8 +717,17 @@ class _$RateStateLoading implements RateStateLoading {
   }
 }
 
-abstract class RateStateLoading implements RateState {
-  const factory RateStateLoading() = _$RateStateLoading;
+abstract class RateStateLoading extends RateState {
+  const factory RateStateLoading(
+          final List<Rate> rates, final List<Rate> filteredRates) =
+      _$RateStateLoading;
+  const RateStateLoading._() : super._();
+
+  List<Rate> get rates;
+  List<Rate> get filteredRates;
+  @JsonKey(ignore: true)
+  _$$RateStateLoadingCopyWith<_$RateStateLoading> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -653,7 +735,7 @@ abstract class _$$RateStateLoadedCopyWith<$Res> {
   factory _$$RateStateLoadedCopyWith(
           _$RateStateLoaded value, $Res Function(_$RateStateLoaded) then) =
       __$$RateStateLoadedCopyWithImpl<$Res>;
-  $Res call({List<Rate> rates});
+  $Res call({List<Rate> rates, List<Rate> filteredRates});
 }
 
 /// @nodoc
@@ -670,11 +752,16 @@ class __$$RateStateLoadedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? rates = freezed,
+    Object? filteredRates = freezed,
   }) {
     return _then(_$RateStateLoaded(
       rates == freezed
           ? _value._rates
           : rates // ignore: cast_nullable_to_non_nullable
+              as List<Rate>,
+      filteredRates == freezed
+          ? _value._filteredRates
+          : filteredRates // ignore: cast_nullable_to_non_nullable
               as List<Rate>,
     ));
   }
@@ -682,8 +769,12 @@ class __$$RateStateLoadedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RateStateLoaded implements RateStateLoaded {
-  const _$RateStateLoaded(final List<Rate> rates) : _rates = rates;
+class _$RateStateLoaded extends RateStateLoaded {
+  const _$RateStateLoaded(
+      final List<Rate> rates, final List<Rate> filteredRates)
+      : _rates = rates,
+        _filteredRates = filteredRates,
+        super._();
 
   final List<Rate> _rates;
   @override
@@ -692,9 +783,16 @@ class _$RateStateLoaded implements RateStateLoaded {
     return EqualUnmodifiableListView(_rates);
   }
 
+  final List<Rate> _filteredRates;
+  @override
+  List<Rate> get filteredRates {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_filteredRates);
+  }
+
   @override
   String toString() {
-    return 'RateState.loaded(rates: $rates)';
+    return 'RateState.loaded(rates: $rates, filteredRates: $filteredRates)';
   }
 
   @override
@@ -702,12 +800,16 @@ class _$RateStateLoaded implements RateStateLoaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RateStateLoaded &&
-            const DeepCollectionEquality().equals(other._rates, _rates));
+            const DeepCollectionEquality().equals(other._rates, _rates) &&
+            const DeepCollectionEquality()
+                .equals(other._filteredRates, _filteredRates));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_rates));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_rates),
+      const DeepCollectionEquality().hash(_filteredRates));
 
   @JsonKey(ignore: true)
   @override
@@ -718,35 +820,43 @@ class _$RateStateLoaded implements RateStateLoaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<Rate> rates) loaded,
-    required TResult Function(String errorMessage) error,
+    required TResult Function(List<Rate> rates, List<Rate> filteredRates)
+        loading,
+    required TResult Function(List<Rate> rates, List<Rate> filteredRates)
+        loaded,
+    required TResult Function(
+            List<Rate> rates, List<Rate> filteredRates, String errorMessage)
+        error,
   }) {
-    return loaded(rates);
+    return loaded(rates, filteredRates);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<Rate> rates)? loaded,
-    TResult Function(String errorMessage)? error,
+    TResult Function(List<Rate> rates, List<Rate> filteredRates)? loading,
+    TResult Function(List<Rate> rates, List<Rate> filteredRates)? loaded,
+    TResult Function(
+            List<Rate> rates, List<Rate> filteredRates, String errorMessage)?
+        error,
   }) {
-    return loaded?.call(rates);
+    return loaded?.call(rates, filteredRates);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<Rate> rates)? loaded,
-    TResult Function(String errorMessage)? error,
+    TResult Function(List<Rate> rates, List<Rate> filteredRates)? loading,
+    TResult Function(List<Rate> rates, List<Rate> filteredRates)? loaded,
+    TResult Function(
+            List<Rate> rates, List<Rate> filteredRates, String errorMessage)?
+        error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(rates);
+      return loaded(rates, filteredRates);
     }
     return orElse();
   }
@@ -789,10 +899,14 @@ class _$RateStateLoaded implements RateStateLoaded {
   }
 }
 
-abstract class RateStateLoaded implements RateState {
-  const factory RateStateLoaded(final List<Rate> rates) = _$RateStateLoaded;
+abstract class RateStateLoaded extends RateState {
+  const factory RateStateLoaded(
+          final List<Rate> rates, final List<Rate> filteredRates) =
+      _$RateStateLoaded;
+  const RateStateLoaded._() : super._();
 
   List<Rate> get rates;
+  List<Rate> get filteredRates;
   @JsonKey(ignore: true)
   _$$RateStateLoadedCopyWith<_$RateStateLoaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -803,7 +917,7 @@ abstract class _$$RateStateErrorCopyWith<$Res> {
   factory _$$RateStateErrorCopyWith(
           _$RateStateError value, $Res Function(_$RateStateError) then) =
       __$$RateStateErrorCopyWithImpl<$Res>;
-  $Res call({String errorMessage});
+  $Res call({List<Rate> rates, List<Rate> filteredRates, String errorMessage});
 }
 
 /// @nodoc
@@ -818,9 +932,19 @@ class __$$RateStateErrorCopyWithImpl<$Res> extends _$RateStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? rates = freezed,
+    Object? filteredRates = freezed,
     Object? errorMessage = freezed,
   }) {
     return _then(_$RateStateError(
+      rates == freezed
+          ? _value._rates
+          : rates // ignore: cast_nullable_to_non_nullable
+              as List<Rate>,
+      filteredRates == freezed
+          ? _value._filteredRates
+          : filteredRates // ignore: cast_nullable_to_non_nullable
+              as List<Rate>,
       errorMessage == freezed
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -831,15 +955,33 @@ class __$$RateStateErrorCopyWithImpl<$Res> extends _$RateStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$RateStateError implements RateStateError {
-  const _$RateStateError(this.errorMessage);
+class _$RateStateError extends RateStateError {
+  const _$RateStateError(
+      final List<Rate> rates, final List<Rate> filteredRates, this.errorMessage)
+      : _rates = rates,
+        _filteredRates = filteredRates,
+        super._();
+
+  final List<Rate> _rates;
+  @override
+  List<Rate> get rates {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_rates);
+  }
+
+  final List<Rate> _filteredRates;
+  @override
+  List<Rate> get filteredRates {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_filteredRates);
+  }
 
   @override
   final String errorMessage;
 
   @override
   String toString() {
-    return 'RateState.error(errorMessage: $errorMessage)';
+    return 'RateState.error(rates: $rates, filteredRates: $filteredRates, errorMessage: $errorMessage)';
   }
 
   @override
@@ -847,13 +989,19 @@ class _$RateStateError implements RateStateError {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RateStateError &&
+            const DeepCollectionEquality().equals(other._rates, _rates) &&
+            const DeepCollectionEquality()
+                .equals(other._filteredRates, _filteredRates) &&
             const DeepCollectionEquality()
                 .equals(other.errorMessage, errorMessage));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(errorMessage));
+      runtimeType,
+      const DeepCollectionEquality().hash(_rates),
+      const DeepCollectionEquality().hash(_filteredRates),
+      const DeepCollectionEquality().hash(errorMessage));
 
   @JsonKey(ignore: true)
   @override
@@ -864,35 +1012,43 @@ class _$RateStateError implements RateStateError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(List<Rate> rates) loaded,
-    required TResult Function(String errorMessage) error,
+    required TResult Function(List<Rate> rates, List<Rate> filteredRates)
+        loading,
+    required TResult Function(List<Rate> rates, List<Rate> filteredRates)
+        loaded,
+    required TResult Function(
+            List<Rate> rates, List<Rate> filteredRates, String errorMessage)
+        error,
   }) {
-    return error(errorMessage);
+    return error(rates, filteredRates, errorMessage);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<Rate> rates)? loaded,
-    TResult Function(String errorMessage)? error,
+    TResult Function(List<Rate> rates, List<Rate> filteredRates)? loading,
+    TResult Function(List<Rate> rates, List<Rate> filteredRates)? loaded,
+    TResult Function(
+            List<Rate> rates, List<Rate> filteredRates, String errorMessage)?
+        error,
   }) {
-    return error?.call(errorMessage);
+    return error?.call(rates, filteredRates, errorMessage);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(List<Rate> rates)? loaded,
-    TResult Function(String errorMessage)? error,
+    TResult Function(List<Rate> rates, List<Rate> filteredRates)? loading,
+    TResult Function(List<Rate> rates, List<Rate> filteredRates)? loaded,
+    TResult Function(
+            List<Rate> rates, List<Rate> filteredRates, String errorMessage)?
+        error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(errorMessage);
+      return error(rates, filteredRates, errorMessage);
     }
     return orElse();
   }
@@ -935,9 +1091,15 @@ class _$RateStateError implements RateStateError {
   }
 }
 
-abstract class RateStateError implements RateState {
-  const factory RateStateError(final String errorMessage) = _$RateStateError;
+abstract class RateStateError extends RateState {
+  const factory RateStateError(
+      final List<Rate> rates,
+      final List<Rate> filteredRates,
+      final String errorMessage) = _$RateStateError;
+  const RateStateError._() : super._();
 
+  List<Rate> get rates;
+  List<Rate> get filteredRates;
   String get errorMessage;
   @JsonKey(ignore: true)
   _$$RateStateErrorCopyWith<_$RateStateError> get copyWith =>
