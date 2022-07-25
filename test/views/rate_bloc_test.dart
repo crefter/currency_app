@@ -36,7 +36,14 @@ void main() {
         () async {
           rateBloc.add(const RateEvent.currencyChosen(''));
           await Future.delayed(const Duration(milliseconds: 10), () {});
-          expect(rateBloc.state, const RateState.error('Something went wrong!'));
+          expect(
+            rateBloc.state,
+            const RateState.error(
+              [],
+              [],
+              'Something went wrong!',
+            ),
+          );
         },
       );
 
@@ -52,8 +59,12 @@ void main() {
           await Future.delayed(const Duration(milliseconds: 10), () {});
           expect(
             rateBloc.state,
-            RateState.error('${currencyApiException.description} '
-                '(code of exception: ${currencyApiException.code.toString()})'),
+            RateState.error(
+              [],
+              [],
+              '${currencyApiException.description} '
+              '(code of exception: ${currencyApiException.code.toString()})',
+            ),
           );
         },
       );
@@ -71,32 +82,36 @@ void main() {
           await Future.delayed(const Duration(milliseconds: 10), () {});
           expect(
             rateBloc.state,
-            RateState.loaded(list),
+            RateState.loaded(list, list),
           );
         },
       );
     });
     group('OnRateFoundStarted', () {
-      test('should return new state RateLoaded if state is RateLoaded', () async {
-        final list = [Rate('USD', 10), Rate('UAR', 5)];
-        when(loadRatesUseCase.call(currency: anyNamed('currency'))).thenAnswer(
-              (_) async {
-            return list;
-          },
-        );
-        rateBloc.add(const RateEvent.currencyChosen('U'));
-        when(findRatesUseCase.call('U', any)).thenAnswer(
-          (_) async {
-            return list;
-          },
-        );
-        rateBloc.add(const RateEvent.foundStarted('U'));
-        await Future.delayed(const Duration(milliseconds: 10), () {});
-        expect(
-          rateBloc.state,
-          RateState.loaded(list),
-        );
-      });
+      test(
+        'should return new state RateLoaded if state is RateLoaded',
+        () async {
+          final list = [Rate('USD', 10), Rate('UAR', 5)];
+          when(loadRatesUseCase.call(currency: anyNamed('currency')))
+              .thenAnswer(
+            (_) async {
+              return list;
+            },
+          );
+          rateBloc.add(const RateEvent.currencyChosen('U'));
+          when(findRatesUseCase.call('U', any)).thenAnswer(
+            (_) async {
+              return list;
+            },
+          );
+          rateBloc.add(const RateEvent.foundStarted('U'));
+          await Future.delayed(const Duration(milliseconds: 10), () {});
+          expect(
+            rateBloc.state,
+            RateState.loaded(list, list),
+          );
+        },
+      );
 
       test('should do nothing if state is not RateLoaded', () async {
         rateBloc.add(const RateEvent.foundStarted('U'));
